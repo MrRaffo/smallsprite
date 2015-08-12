@@ -31,6 +31,7 @@ static int                  selected_sprite_definition = 0;         // sprite de
 
 
 
+
 //=======================
 //  BASIC COLOURS
 //=======================
@@ -354,6 +355,49 @@ static void Draw_Main_Palette()
     return;
 }
 
+// draws the sprite grid border and sprite definitions
+static void Draw_Sprite_Grid()
+{
+    int r, c;
+
+    for( r = 1; r < GUI_AREA_SPRITE_GRID_ROWS; r++ )
+    {
+        GRA_Draw_Horizontal_Line(   GUI_AREA_SPRITE_GRID_X,
+                                    GUI_AREA_SPRITE_GRID_X + GUI_AREA_SPRITE_GRID_W,
+                                    GUI_AREA_SPRITE_GRID_Y + (r*GUI_SPRITE_H),
+                                    DARK_GREY
+                                );
+    }
+
+    for( c = 1; c < GUI_AREA_SPRITE_GRID_COLUMNS; c++ )
+    {
+        GRA_Draw_Vertical_Line(     GUI_AREA_SPRITE_GRID_X + (c*GUI_SPRITE_W),
+                                    GUI_AREA_SPRITE_GRID_Y,
+                                    GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H,
+                                    DARK_GREY
+                              );
+    }
+    
+    // TODO
+    // this call must be made relative to the current 'base' of the sprite grid, ie, must take
+    // into account how much the grid has been scrolled down
+    int sprite_x = 0, sprite_y = 0;
+    
+    sprite_x = selected_sprite_definition % GUI_AREA_SPRITE_GRID_COLUMNS;
+    sprite_y = selected_sprite_definition / GUI_AREA_SPRITE_GRID_ROWS;
+
+    GRA_Draw_Hollow_Rectangle(  GUI_AREA_SPRITE_GRID_X + sprite_x * GUI_SPRITE_W,
+                                GUI_AREA_SPRITE_GRID_Y + sprite_y * GUI_SPRITE_H,
+                                GUI_SPRITE_W,
+                                GUI_SPRITE_H,
+                                CYAN
+                             );
+
+    return;
+}
+
+
+
 //======================
 //  BUTTON FUNCTIONS
 //======================
@@ -440,12 +484,12 @@ static void Input_Sprite_Edit( int button, int x, int y )
         // set pixel to selected colour (mouse button 1)
         if( button == 1 )
         {
-            SPR_Set_Pixel( 0, index, selected_palette_option );
+            SPR_Set_Pixel( selected_sprite_definition, index, selected_palette_option );
         }
         // set pixel to transparency (mouse button 2, ie erase)
         else if( button == 2 )
         {
-            SPR_Set_Pixel( 0, index, 0 );
+            SPR_Set_Pixel( selected_sprite_definition, index, 0 );
         }
     }
 
@@ -505,6 +549,9 @@ static void Input_Main_Palette( int button, int x, int y )
     return;
 }
 
+
+
+
 //=====================================================================
 //  PUBLIC FUNCTIONS
 //=====================================================================
@@ -554,6 +601,8 @@ void GUI_Draw_Interface()
     Draw_Area_Outlines();
     Draw_Main_Palette();
     Draw_User_Palette_Controls();
+
+    Draw_Sprite_Grid();
 
     Set_Palette_Index_Text();
 

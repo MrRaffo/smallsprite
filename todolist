@@ -1,0 +1,15 @@
+This is a checklist of planned features with notes on how to implement them
+
+Add the 'Sprite Grid', including selection and drawing of sprites
+
+    Draw the grid outline, and highlight the currently selected sprite definition
+
+    Create 'Add Sprite' button to add new sprites, similar to C64 SpritePad
+
+    Each available sprite slot on the grid should be highlighted in some way, either
+    by tinting the background or changing the colour of the slots border
+
+    Each sprite that is currently defined, found by SPR_Number_Of_Sprites() should be drawn
+    each frame, using the palette that it was created with
+
+    Implement support for the scroller

@@ -51,6 +51,10 @@ void SPR_Set_Pixel( int sprite_index, int pixel_index, uint8_t pixel_value );
 uint8_t SPR_Get_Pixel( int sprite_index, int pixel_index );
 
 
+// return the current number of sprites
+int SPR_Get_Number_Of_Sprites();
+
+
 // free allocated sprite memory
 void SPR_Free();
 
