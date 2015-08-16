@@ -42,6 +42,8 @@ typedef struct sprite_s sprite_type;
 // add a sprite to the list
 void SPR_Add_Sprite();
 
+// remove last sprite
+void SPR_Remove_Sprite();
 
 // Set a particular pixel in the sprite definition
 void SPR_Set_Pixel( int sprite_index, int pixel_index, uint8_t pixel_value );
@@ -53,6 +55,13 @@ uint8_t SPR_Get_Pixel( int sprite_index, int pixel_index );
 
 // return the current number of sprites
 int SPR_Get_Number_Of_Sprites();
+
+// returns the current color index of the sprite
+int SPR_Get_Sprite_Palette_Index( int sprite_index );
+
+
+// set the sprites palette
+void SPR_Set_Sprite_Palette_Index( int sprite_index, int palette_index );
 
 
 // free allocated sprite memory

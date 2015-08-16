@@ -14,7 +14,7 @@
 //===========================
 
 #define PROGRAM_NAME_STRING                     "smallsprite"
-#define PROGRAM_VERSION_STRING                  "v0.2"
+#define PROGRAM_VERSION_STRING                  "v0.3"
 
 //===========================
 //  PROGRAM CONSTANTS

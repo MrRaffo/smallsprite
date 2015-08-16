@@ -260,6 +260,12 @@ int GRA_Check_Quit()
     return 1;
 }
 
+// wrapper
+int GRA_GetTicks()
+{
+    return SDL_GetTicks();
+}
+
 
 
 //=======================

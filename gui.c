@@ -26,8 +26,10 @@
 //=======================
 
 static int                  selected_palette_index  = 0;            // palette user is currently using
-static int                  selected_palette_option = 0;            // palette option to change (user_palette)
-static int                  selected_sprite_definition = 0;         // sprite definition to edit (sprite_grid)
+static int                  selected_palette_option = 1;            // palette option to change
+
+static int                  sprite_grid_base        = 0;            // index of sprite grid 0 (scroll)
+static int                  sprite_grid_index = 0;         // sprite definition to edit (sprite_grid)
 
 
 
@@ -47,6 +49,7 @@ static uint32_t             YELLOW;
 static uint32_t             CYAN;
 static uint32_t             LIGHT_GREY;
 static uint32_t             DARK_GREY;
+static uint32_t             V_DARK_GREY;
 static uint32_t             INVIS;
 
 
@@ -262,6 +265,31 @@ void Set_Palette_Index_Text()
     return;
 }
 
+// drawing a sprite preview (64x64 pixels) for the grid and animation preview areas
+static void Draw_Sprite_Preview( int x, int y, int sprite_index )
+{
+    int i, dx, dy;
+    int palette_index = SPR_Get_Sprite_Palette_Index( sprite_index );
+
+    for( i = 0; i < SPRITE_SIZE; i++ )
+    {
+        dx = i % SPRITE_W;
+        dy = i / SPRITE_W;
+
+        int color_index = SPR_Get_Pixel( sprite_index, i );
+        int main_palette_index = PAL_Get_User_Palette_Index( palette_index, color_index );
+        uint32_t color = PAL_Get_Main_Palette_Color( main_palette_index );
+
+        GRA_Draw_Filled_Rectangle(  x+dx*4,
+                                    y+dy*4,
+                                    4, 4,
+                                    color
+                                 );
+    }
+
+    return;
+}
+
 
 //========================
 //  DRAW FUNCTIONS
@@ -288,8 +316,6 @@ static void Draw_Area_Outlines()
 // draw the controls for the sprite editor
 static void Draw_User_Palette_Controls()
 {
-    //TODO consider putting user palette size in defs.h
-    
     int i;
     for( i = 0; i < 16; i++ )
     {
@@ -358,8 +384,33 @@ static void Draw_Main_Palette()
 // draws the sprite grid border and sprite definitions
 static void Draw_Sprite_Grid()
 {
+    
+    // this will show which sprite definitions are not yet active
+    GRA_Draw_Filled_Rectangle(  GUI_AREA_SPRITE_GRID_X,
+                                GUI_AREA_SPRITE_GRID_Y,
+                                GUI_AREA_SPRITE_GRID_W,
+                                GUI_AREA_SPRITE_GRID_H,
+                                V_DARK_GREY
+                             );
+    
+    int no_of_sprites = SPR_Get_Number_Of_Sprites();
+
+    int cur_sprite, cur_x, cur_y;
+    for( cur_sprite = sprite_grid_base; cur_sprite < no_of_sprites; cur_sprite++ )
+    {
+        cur_x = (cur_sprite - sprite_grid_base) % GUI_AREA_SPRITE_GRID_COLUMNS;
+        cur_y = (cur_sprite - sprite_grid_base) / GUI_AREA_SPRITE_GRID_COLUMNS;
+
+        Draw_Sprite_Preview (   GUI_AREA_SPRITE_GRID_X + cur_x*GUI_SPRITE_W,
+                                GUI_AREA_SPRITE_GRID_Y + cur_y*GUI_SPRITE_H,
+                                cur_sprite
+                            );
+    }
+
+
     int r, c;
 
+    // Draw the grid
     for( r = 1; r < GUI_AREA_SPRITE_GRID_ROWS; r++ )
     {
         GRA_Draw_Horizontal_Line(   GUI_AREA_SPRITE_GRID_X,
@@ -378,13 +429,13 @@ static void Draw_Sprite_Grid()
                               );
     }
     
-    // TODO
-    // this call must be made relative to the current 'base' of the sprite grid, ie, must take
-    // into account how much the grid has been scrolled down
-    int sprite_x = 0, sprite_y = 0;
+
+    // highlight the selected definition
+    int sprite_x = 0, sprite_y = 0, index = sprite_grid_index - sprite_grid_base;
     
-    sprite_x = selected_sprite_definition % GUI_AREA_SPRITE_GRID_COLUMNS;
-    sprite_y = selected_sprite_definition / GUI_AREA_SPRITE_GRID_ROWS;
+    sprite_x = index % GUI_AREA_SPRITE_GRID_COLUMNS;
+    sprite_y = index / GUI_AREA_SPRITE_GRID_COLUMNS;
+
 
     GRA_Draw_Hollow_Rectangle(  GUI_AREA_SPRITE_GRID_X + sprite_x * GUI_SPRITE_W,
                                 GUI_AREA_SPRITE_GRID_Y + sprite_y * GUI_SPRITE_H,
@@ -416,7 +467,10 @@ void BTN_Next_User_Palette()
         strncpy( palette_index_text, "N/A", 4 );
         palette_index_text[3] = '\0';
     }
-    
+
+    // set the selected palette to the current sprite
+    SPR_Set_Sprite_Palette_Index( sprite_grid_index, selected_palette_index );
+
     return;
 
 }
@@ -434,6 +488,69 @@ void BTN_Prev_User_Palette()
     {
         strncpy( palette_index_text, "N/A", 4 );
         palette_index_text[3] = '\0';
+    }
+
+    // set the selected palette to the current sprite
+    SPR_Set_Sprite_Palette_Index( sprite_grid_index, selected_palette_index );
+
+    return;
+}
+
+    //== GRID SCROLL ==//
+
+void BTN_Scroll_Grid_Up()
+{
+    if( sprite_grid_base > 0 )
+    {
+        sprite_grid_base -= GUI_AREA_SPRITE_GRID_COLUMNS;
+
+        // check that the sprite_grid_base is correctly aligned
+        if( (sprite_grid_base % GUI_AREA_SPRITE_GRID_COLUMNS) != 0 )
+        {
+            UTI_Print_Debug( "sprite_grid_base incorrectly aligned" );
+            sprite_grid_base = 0;
+        }
+    }
+
+    if( sprite_grid_base < 0 )
+    {
+        sprite_grid_base = 0;
+    }
+
+    return;
+}
+
+void BTN_Scroll_Grid_Down()
+{
+    sprite_grid_base += GUI_AREA_SPRITE_GRID_COLUMNS;
+
+    // protect against signed int wrap-around, however unlikely
+    if( sprite_grid_base < 0 )
+    {
+        sprite_grid_base = 0;
+    }
+
+    return;
+}
+
+    //== SPRITE GRID ==//
+
+void BTN_Add_Sprite()
+{
+    SPR_Add_Sprite();
+
+    return;
+}
+
+void BTN_Remove_Sprite()
+{
+    SPR_Remove_Sprite();
+    
+    int no_of_sprites;
+
+    if( sprite_grid_index >= ( no_of_sprites = SPR_Get_Number_Of_Sprites() ) )
+    {
+        sprite_grid_index = no_of_sprites - 1;
     }
 
     return;
@@ -484,12 +601,12 @@ static void Input_Sprite_Edit( int button, int x, int y )
         // set pixel to selected colour (mouse button 1)
         if( button == 1 )
         {
-            SPR_Set_Pixel( selected_sprite_definition, index, selected_palette_option );
+            SPR_Set_Pixel( sprite_grid_index, index, selected_palette_option );
         }
         // set pixel to transparency (mouse button 2, ie erase)
         else if( button == 2 )
         {
-            SPR_Set_Pixel( selected_sprite_definition, index, 0 );
+            SPR_Set_Pixel( sprite_grid_index, index, 0 );
         }
     }
 
@@ -550,7 +667,43 @@ static void Input_Main_Palette( int button, int x, int y )
 }
 
 
+static void Input_Sprite_Grid( int button, int x, int y )
+{
+    if( button == 1 )
+    {
+        Get_Relative_Position( AREA_SPRITE_GRID, &x, &y );
 
+        int row, col, index;
+
+        row = y / GUI_SPRITE_H;
+        col = x / GUI_SPRITE_W;
+
+        printf( "ROW: %d\tCOL: %d\n", row, col );
+
+        index = row * GUI_AREA_SPRITE_GRID_COLUMNS + col;
+
+        index += sprite_grid_base;
+
+        printf( "Attempting to select sprite def %d\n", index );
+
+        // check sprite exists
+        if( index >= SPR_Get_Number_Of_Sprites() )
+        {
+            UTI_Print_Debug( "Invalid sprite index choice (Grid)" );
+            return;
+        }
+
+        sprite_grid_index = index;
+
+        // change the selected palette to the one associated with the new sprite definition
+        selected_palette_index = SPR_Get_Sprite_Palette_Index( sprite_grid_index );
+        Convert_Int_To_String( palette_index_text, selected_palette_index, MAX_INT_STRING );
+ 
+    }
+
+
+    return;
+}
 
 //=====================================================================
 //  PUBLIC FUNCTIONS
@@ -570,6 +723,7 @@ int GUI_Init()
     CYAN        = GRA_Create_Color( 0x00, 0xff, 0xff, 0xff );
     LIGHT_GREY  = GRA_Create_Color( 0xb0, 0xb0, 0xb0, 0xff );
     DARK_GREY   = GRA_Create_Color( 0x60, 0x60, 0x60, 0xff );
+    V_DARK_GREY = GRA_Create_Color( 0x20, 0x20, 0x20, 0xff );
     INVIS       = GRA_Create_Color( 0x00, 0x00, 0x00, 0x00 );
    
     area_color[AREA_SPRITE_EDIT]                        = LIGHT_GREY;
@@ -585,11 +739,54 @@ int GUI_Init()
     //  CREATE BUTTONS
     //========================
 
+    //== PALETTE BUTTONS ==//
 
-    GRA_Make_Button( GUI_AREA_USER_PALETTE_X+15, GUI_AREA_USER_PALETTE_Y+0, 96, 16, "PREV", BTN_Prev_User_Palette );
-    GRA_Make_Button( GUI_AREA_USER_PALETTE_X+149, GUI_AREA_USER_PALETTE_Y+0, 96, 16, "NEXT", BTN_Next_User_Palette );
+    GRA_Make_Button (   GUI_AREA_USER_PALETTE_X+15, 
+                        GUI_AREA_USER_PALETTE_Y+0, 
+                        96, 16, "PREV", 
+                        BTN_Prev_User_Palette 
+                    );
+
+    GRA_Make_Button (   GUI_AREA_USER_PALETTE_X+149, 
+                        GUI_AREA_USER_PALETTE_Y+0, 
+                        96, 16, "NEXT", 
+                        BTN_Next_User_Palette 
+                    );
 
     Convert_Int_To_String( palette_index_text, selected_palette_index, MAX_INT_STRING );
+
+
+    //== SCROLL BUTTONS ==//
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_SCROLL_X,
+                        GUI_AREA_SPRITE_GRID_SCROLL_Y,
+                        GUI_AREA_SPRITE_GRID_SCROLL_W,
+                        GUI_AREA_SPRITE_GRID_SCROLL_W,
+                        "^",
+                        BTN_Scroll_Grid_Up
+                    );
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_SCROLL_X,
+                        GUI_AREA_SPRITE_GRID_SCROLL_Y + (GUI_AREA_SPRITE_GRID_SCROLL_H - GUI_AREA_SPRITE_GRID_SCROLL_W),
+                        GUI_AREA_SPRITE_GRID_SCROLL_W,
+                        GUI_AREA_SPRITE_GRID_SCROLL_W,
+                        "v",
+                        BTN_Scroll_Grid_Down
+                    );
+
+    //== GRID BUTTONS ==//
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_X,
+                        GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H + 8,
+                        96, 24, "ADD SPR",
+                        BTN_Add_Sprite
+                    );
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_X + 128,
+                        GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H + 8,
+                        96, 24, "REM SPR",
+                        BTN_Remove_Sprite
+                    );
 
     return 1;
 };
@@ -621,7 +818,7 @@ void GUI_Draw_Edit_Sprite()
         x = i % SPRITE_W;
         y = i / SPRITE_W;
 
-        int color_index = SPR_Get_Pixel( selected_sprite_definition, i );
+        int color_index = SPR_Get_Pixel( sprite_grid_index, i );
         int main_palette_index = PAL_Get_User_Palette_Index( selected_palette_index, color_index );
         uint32_t color  = PAL_Get_Main_Palette_Color( main_palette_index );
 
@@ -677,6 +874,10 @@ void GUI_Get_Mouse_Input()
             Input_Main_Palette( m_button, mouse_x, mouse_y );
             break;
         
+        case AREA_SPRITE_GRID:
+            Input_Sprite_Grid ( m_button, mouse_x, mouse_y );
+            break;
+
         default:
             break;
 

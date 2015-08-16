@@ -1,15 +1,16 @@
 This is a checklist of planned features with notes on how to implement them
 
-Add the 'Sprite Grid', including selection and drawing of sprites
+ANIMATION FEATURES
 
-    Draw the grid outline, and highlight the currently selected sprite definition
+    Complete gui for animation controls including highlighting current frame
 
-    Create 'Add Sprite' button to add new sprites, similar to C64 SpritePad
+    Add ability to create and remove animations
 
-    Each available sprite slot on the grid should be highlighted in some way, either
-    by tinting the background or changing the colour of the slots border
+    Add ability to add selected sprite definitions to current animation
 
-    Each sprite that is currently defined, found by SPR_Number_Of_Sprites() should be drawn
-    each frame, using the palette that it was created with
-
-    Implement support for the scroller
+    Add relevent buttons to for animation editing including
+        - increasing number of frames in the animation
+        - reducing the number of frames in the animation
+        - consided adding ability to scroll frames, de facto removing max frame cap
+    
+    Decide whether an animation should use one palette or each sprites palette (1 is practical)

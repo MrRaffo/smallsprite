@@ -93,7 +93,8 @@ void GRA_Delay( int milli );
 // check if user quits, by clicking window 'x' or pressed escape
 int GRA_Check_Quit();
 
-
+// wrapper
+int GRA_GetTicks();
 
 //=======================
 //  GRAPHICS

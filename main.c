@@ -73,14 +73,15 @@ int main( int argc, char *argv[] )
     // INITIALIZE GUI
     GUI_Init();
 
-    SPR_Add_Sprite();
 
+    SPR_Add_Sprite();
+    
     int running = 1;            // loop control
     unsigned int start_time;
     unsigned int end_time;
     while( running )
     {
-        start_time = SDL_GetTicks();
+        start_time = GRA_GetTicks();
 
         // clear screen for next render
         GRA_Clear_Screen();
@@ -102,7 +103,7 @@ int main( int argc, char *argv[] )
         running = GRA_Check_Quit();
 
 
-        end_time = SDL_GetTicks() - start_time;
+        end_time = GRA_GetTicks() - start_time;
     
         if( end_time < FRAME_TIME )
         {
@@ -110,13 +111,15 @@ int main( int argc, char *argv[] )
         }
     }
 
-    SPR_DEBUG_Show_Sprite( 0 );
+    // SPR_DEBUG_Show_Sprite( 0 );
 
     // free palette memory
     PAL_Free();
 
+    // free sprite memory
     SPR_Free();
 
+    // free graphics memory and shut down SDL
     GRA_Close(); 
 
     return 0;

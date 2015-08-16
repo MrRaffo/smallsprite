@@ -57,6 +57,8 @@ void SPR_Add_Sprite()
             sprite[no_of_sprites]->definition[i] = 0x00;
         }
 
+        sprite[no_of_sprites]->palette = 0;
+
         no_of_sprites++;
         return;
     
@@ -66,6 +68,18 @@ void SPR_Add_Sprite()
     
     return;
     
+}
+
+// remove the last sprite on the list
+void SPR_Remove_Sprite()
+{
+    // check there are more than 1 sprite, must be at least one sprite to display
+    if( no_of_sprites > 1 )
+    {
+        UTI_EC_Free( sprite[--no_of_sprites] );
+    }
+
+    return;
 }
 
 
@@ -112,6 +126,31 @@ uint8_t SPR_Get_Pixel( int sprite_index, int pixel_index )
 
 }
 
+
+int SPR_Get_Sprite_Palette_Index( int sprite_index )
+{
+    return sprite[sprite_index]->palette;
+}
+
+
+void SPR_Set_Sprite_Palette_Index( int sprite_index, int palette_index )
+{
+    if( sprite_index < 0 || sprite_index >= no_of_sprites )
+    {
+        return;
+    }
+
+    sprite[sprite_index]->palette = palette_index;
+
+    return;
+}
+
+
+// return the current number of sprites
+int SPR_Get_Number_Of_Sprites()
+{
+    return no_of_sprites;
+}
 
 
 // clean up function
