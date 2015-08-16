@@ -100,21 +100,23 @@
 // animation editor frame display
 #define GUI_AREA_ANIM_EDIT_LABEL                "ANIMATION EDITOR"
 #define GUI_AREA_ANIM_EDIT_X                    GUI_WINDOW_BORDER
-#define GUI_AREA_ANIM_EDIT_Y                    624
+#define GUI_AREA_ANIM_EDIT_Y                    650
 #define GUI_AREA_ANIM_EDIT_W                    GUI_SPRITE_W*10
 #define GUI_AREA_ANIM_EDIT_H                    GUI_SPRITE_H
 
 // animation editor controls
 #define GUI_AREA_ANIM_CONTROL_LABEL             "ANIMATION CONTROLS"
 #define GUI_AREA_ANIM_CONTROL_X                 GUI_WINDOW_BORDER
-#define GUI_AREA_ANIM_CONTROL_Y                 704
+#define GUI_AREA_ANIM_CONTROL_Y                 724
 #define GUI_AREA_ANIM_CONTROL_W                 768
 #define GUI_AREA_ANIM_CONTROL_H                 64
+
+#define GUI_AREA_ANIM_FRAMES                    10
 
 // animation previewer
 #define GUI_AREA_ANIM_PLAYER_LABEL              "ANIMATION PLAYER"
 #define GUI_AREA_ANIM_PLAYER_X                  736
-#define GUI_AREA_ANIM_PLAYER_Y                  624
+#define GUI_AREA_ANIM_PLAYER_Y                  650
 #define GUI_AREA_ANIM_PLAYER_W                  GUI_SPRITE_W
 #define GUI_AREA_ANIM_PLAYER_H                  GUI_SPRITE_H
 

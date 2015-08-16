@@ -4,6 +4,8 @@ ANIMATION FEATURES
 
     Complete gui for animation controls including highlighting current frame
 
+    Add anim.c and anim.h with anim_type structs and relative functions
+
     Add ability to create and remove animations
 
     Add ability to add selected sprite definitions to current animation

@@ -25,13 +25,13 @@
 // USER OPTIONS
 //=======================
 
-static int                  selected_palette_index  = 0;            // palette user is currently using
-static int                  selected_palette_option = 1;            // palette option to change
+static int                  selected_palette_index  = 0;    // palette user is currently using
+static int                  selected_palette_option = 1;    // palette option to change
 
-static int                  sprite_grid_base        = 0;            // index of sprite grid 0 (scroll)
-static int                  sprite_grid_index = 0;         // sprite definition to edit (sprite_grid)
+static int                  sprite_grid_base        = 0;    // index of sprite grid 0 (scroll)
+static int                  sprite_grid_index       = 0;    // sprite definition to edit (sprite_grid)
 
-
+static int                  anim_frame_index        = 0;    // selected frame
 
 
 //=======================
@@ -265,6 +265,13 @@ void Set_Palette_Index_Text()
     return;
 }
 
+void Set_Animation_Label_Text()
+{
+    GRA_Simple_Text( "ANIMATIONS", GUI_AREA_ANIM_EDIT_X, GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
+
+    return;
+}
+
 // drawing a sprite preview (64x64 pixels) for the grid and animation preview areas
 static void Draw_Sprite_Preview( int x, int y, int sprite_index )
 {
@@ -448,6 +455,40 @@ static void Draw_Sprite_Grid()
 }
 
 
+// Draw the animation definition area
+void Draw_Animation_Editor()
+{
+    // draw a dark grey background to highlight unselected frame slots
+    GRA_Draw_Filled_Rectangle(  GUI_AREA_ANIM_EDIT_X,
+                                GUI_AREA_ANIM_EDIT_Y,
+                                GUI_AREA_ANIM_EDIT_W,
+                                GUI_AREA_ANIM_EDIT_H,
+                                V_DARK_GREY
+                             );
+
+    // TODO - Draw Sprites/Frames
+
+    int col;
+
+    for( col = 1; col < GUI_AREA_ANIM_FRAMES; col++ )
+    {
+        GRA_Draw_Vertical_Line( GUI_AREA_ANIM_EDIT_X + col*GUI_SPRITE_W,
+                                GUI_AREA_ANIM_EDIT_Y,
+                                GUI_AREA_ANIM_EDIT_Y + GUI_AREA_ANIM_EDIT_H,
+                                DARK_GREY
+                              );
+    }
+
+    // hightlight selected frame
+    GRA_Draw_Hollow_Rectangle(  GUI_AREA_ANIM_EDIT_X + anim_frame_index * GUI_SPRITE_W,
+                                GUI_AREA_ANIM_EDIT_Y,
+                                GUI_SPRITE_W,
+                                GUI_SPRITE_H,
+                                CYAN
+                             );
+
+    return;
+}
 
 //======================
 //  BUTTON FUNCTIONS
@@ -678,13 +719,9 @@ static void Input_Sprite_Grid( int button, int x, int y )
         row = y / GUI_SPRITE_H;
         col = x / GUI_SPRITE_W;
 
-        printf( "ROW: %d\tCOL: %d\n", row, col );
-
         index = row * GUI_AREA_SPRITE_GRID_COLUMNS + col;
 
         index += sprite_grid_base;
-
-        printf( "Attempting to select sprite def %d\n", index );
 
         // check sprite exists
         if( index >= SPR_Get_Number_Of_Sprites() )
@@ -723,15 +760,15 @@ int GUI_Init()
     CYAN        = GRA_Create_Color( 0x00, 0xff, 0xff, 0xff );
     LIGHT_GREY  = GRA_Create_Color( 0xb0, 0xb0, 0xb0, 0xff );
     DARK_GREY   = GRA_Create_Color( 0x60, 0x60, 0x60, 0xff );
-    V_DARK_GREY = GRA_Create_Color( 0x20, 0x20, 0x20, 0xff );
+    V_DARK_GREY = GRA_Create_Color( 0x08, 0x08, 0x08, 0xff );
     INVIS       = GRA_Create_Color( 0x00, 0x00, 0x00, 0x00 );
    
     area_color[AREA_SPRITE_EDIT]                        = LIGHT_GREY;
     area_color[AREA_SPRITE_GRID]                        = DARK_GREY;
-    area_color[AREA_SPRITE_GRID_SCROLL]                 = LIGHT_GREY;
+    area_color[AREA_SPRITE_GRID_SCROLL]                 = DARK_GREY;
     area_color[AREA_MAIN_PALETTE]                       = LIGHT_GREY;
     area_color[AREA_USER_PALETTE]                       = INVIS;
-    area_color[AREA_ANIM_EDIT]                          = YELLOW;
+    area_color[AREA_ANIM_EDIT]                          = DARK_GREY;
     area_color[AREA_ANIM_CONTROL]                       = BLUE;
     area_color[AREA_ANIM_PLAYER]                        = RED;
 
@@ -801,7 +838,10 @@ void GUI_Draw_Interface()
 
     Draw_Sprite_Grid();
 
+    Draw_Animation_Editor();
+
     Set_Palette_Index_Text();
+    Set_Animation_Label_Text();
 
     GRA_Draw_Buttons();
 
@@ -822,8 +862,10 @@ void GUI_Draw_Edit_Sprite()
         int main_palette_index = PAL_Get_User_Palette_Index( selected_palette_index, color_index );
         uint32_t color  = PAL_Get_Main_Palette_Color( main_palette_index );
 
-        GRA_Draw_Filled_Rectangle(  GUI_AREA_SPRITE_EDIT_X+x*SPRITE_W, GUI_AREA_SPRITE_EDIT_Y+y*SPRITE_H,
-                                    GUI_AREA_SPRITE_EDIT_PIXEL_W, GUI_AREA_SPRITE_EDIT_PIXEL_H,
+        GRA_Draw_Filled_Rectangle(  GUI_AREA_SPRITE_EDIT_X+x*SPRITE_W,
+                                    GUI_AREA_SPRITE_EDIT_Y+y*SPRITE_H,
+                                    GUI_AREA_SPRITE_EDIT_PIXEL_W, 
+                                    GUI_AREA_SPRITE_EDIT_PIXEL_H,
                                     color
                                  );
     }
