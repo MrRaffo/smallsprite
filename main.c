@@ -9,7 +9,7 @@
 #include "gui.h"
 #include "palette.h"
 #include "sprite.h"
-
+#include "anim.h"
 
 
 //====================================================================
@@ -75,6 +75,7 @@ int main( int argc, char *argv[] )
 
 
     SPR_Add_Sprite();
+    ANI_Add_Animation();
     
     int running = 1;            // loop control
     unsigned int start_time;
@@ -118,6 +119,9 @@ int main( int argc, char *argv[] )
 
     // free sprite memory
     SPR_Free();
+
+    // free animation data
+    // ANI_Free();
 
     // free graphics memory and shut down SDL
     GRA_Close(); 

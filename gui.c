@@ -16,6 +16,7 @@
 #include "utility.h"
 #include "palette.h"
 #include "sprite.h"
+#include "anim.h"
 
 //=====================================================================
 //  FILE VARIABLES
@@ -31,8 +32,10 @@ static int                  selected_palette_option = 1;    // palette option to
 static int                  sprite_grid_base        = 0;    // index of sprite grid 0 (scroll)
 static int                  sprite_grid_index       = 0;    // sprite definition to edit (sprite_grid)
 
+static int                  anim_index              = 0;    // current animation to edit
 static int                  anim_frame_index        = 0;    // selected frame
-
+static int                  anim_frame_base         = 0;    // index of first frame slot
+static int                  anim_total              = 0;    // for displaying text
 
 //=======================
 //  BASIC COLOURS
@@ -201,6 +204,8 @@ static char *user_palette_control_label[] = {   "TRANSPARENT",
 
 
 static char         palette_index_text[MAX_INT_STRING];
+static char         anim_index_text[MAX_INT_STRING];
+static char         anim_total_text[MAX_INT_STRING];
 
 static void reverse_string( char str[] )
 {
@@ -267,7 +272,17 @@ void Set_Palette_Index_Text()
 
 void Set_Animation_Label_Text()
 {
-    GRA_Simple_Text( "ANIMATIONS", GUI_AREA_ANIM_EDIT_X, GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
+    GRA_Simple_Text(    "ANIMATION - ", GUI_AREA_ANIM_EDIT_X, 
+                        GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
+    
+    GRA_Simple_Text(    anim_index_text, GUI_AREA_ANIM_EDIT_X + 96, 
+                        GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
+    
+    GRA_Simple_Text(    "    /", GUI_AREA_ANIM_EDIT_X + 104,
+                        GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
+
+    GRA_Simple_Text(    anim_total_text, GUI_AREA_ANIM_EDIT_X + 152,
+                        GUI_AREA_ANIM_EDIT_Y-16, WHITE, 0, 0 );
 
     return;
 }
@@ -597,6 +612,58 @@ void BTN_Remove_Sprite()
     return;
 }
 
+
+    //== ANIM CONTROLS ==//
+
+void BTN_Prev_Anim()
+{
+    if( anim_index > 0 )
+    {
+        anim_index--;
+        Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
+    }
+
+    return;
+}
+
+void BTN_Next_Anim()
+{
+    if( anim_index < ( ANI_Get_Number_Of_Animations()-1 ) )
+    {
+        anim_index++;
+        Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+    }
+
+    return;
+}
+
+void BTN_Add_Anim()
+{
+    ANI_Add_Animation();
+    anim_total = ANI_Get_Number_Of_Animations()-1;
+    
+    Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
+
+    return;
+}
+
+void BTN_Remove_Anim()
+{
+    ANI_Remove_Animation();
+
+    anim_total = ANI_Get_Number_Of_Animations()-1;
+    Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
+
+    if( anim_index > anim_total )
+    {
+        anim_index = anim_total;
+        Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+    }
+
+    return;
+}
+
+
 //======================
 //  INPUT FUNCTIONS
 //======================
@@ -769,7 +836,7 @@ int GUI_Init()
     area_color[AREA_MAIN_PALETTE]                       = LIGHT_GREY;
     area_color[AREA_USER_PALETTE]                       = INVIS;
     area_color[AREA_ANIM_EDIT]                          = DARK_GREY;
-    area_color[AREA_ANIM_CONTROL]                       = BLUE;
+    area_color[AREA_ANIM_CONTROL]                       = INVIS;
     area_color[AREA_ANIM_PLAYER]                        = RED;
 
     //========================
@@ -791,7 +858,8 @@ int GUI_Init()
                     );
 
     Convert_Int_To_String( palette_index_text, selected_palette_index, MAX_INT_STRING );
-
+    Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+    Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
 
     //== SCROLL BUTTONS ==//
 
@@ -824,6 +892,34 @@ int GUI_Init()
                         96, 24, "REM SPR",
                         BTN_Remove_Sprite
                     );
+
+    
+    // ANIMATION EDITOR BUTTONS
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        96, 24, "PREV ANIM",
+                        BTN_Prev_Anim
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 128,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        96, 24, "NEXT ANIM",
+                        BTN_Next_Anim
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X,
+                        GUI_AREA_ANIM_CONTROL_Y + 32,
+                        96, 24, "ADD ANIM",
+                        BTN_Add_Anim
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 128,
+                        GUI_AREA_ANIM_CONTROL_Y + 32,
+                        96, 24, "REM ANIM",
+                        BTN_Remove_Anim
+                    );
+
 
     return 1;
 };
