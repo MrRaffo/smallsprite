@@ -59,18 +59,28 @@ void     ANI_Add_Animation()
     return;
 }
 
-// remove last animation
-void    ANI_Remove_Animation()
+// remove given animation
+void    ANI_Remove_Animation( int index )
 {
-    if( no_of_animations > 1 )
+
+    if( no_of_animations > 1 && index < no_of_animations && index >= 0 )
     {
-        UTI_EC_Free( animation[--no_of_animations] );
-        animation[no_of_animations] = NULL;
+        UTI_EC_Free( animation[index] );
+        animation[index] = NULL;
+
+        for( index += 1; index < no_of_animations; index++ )
+        {
+            // rearrange animation list
+            animation[index-1] = animation[index];
+        }
+
+        no_of_animations--;
     }
 
     return;
 }
 
+// TODO - this is a mix of Add_Frame and Set_Frame - fix
 // add frame to current animation, return 1 on success
 int     ANI_Add_Frame( int anim_index, int value )
 {
@@ -128,6 +138,29 @@ int     ANI_Get_Number_Of_Frames( int anim_index )
     return -1;
 }
 
+
+int     ANI_Get_Frame( int anim_index, int frame_index )
+{
+    if( anim_index < 0 || anim_index >= no_of_animations )
+    {
+        UTI_Print_Debug( "Invalid animation index" );
+        return -1;
+    }
+
+    anim_type *temp;
+    temp = animation[anim_index];
+
+    if( frame_index < 0 || frame_index > ( temp->no_of_frames ) )
+    {
+        UTI_Print_Debug( "Invalid frame index" );
+        return -1;
+    }
+
+    return temp->frame_list[frame_index];
+
+}
+
+
 // return the number of animations
 int     ANI_Get_Number_Of_Animations()
 {
@@ -138,9 +171,28 @@ int     ANI_Get_Number_Of_Animations()
 
 void    ANI_Free()
 {
-    while( no_of_animations > 0 )
+    int counter;
+
+    for( counter = 0; counter < no_of_animations; counter++ )
     {
-        ANI_Remove_Animation();
+        UTI_EC_Free( animation[counter] );
+        animation[counter] = NULL;
+    }
+
+    return;
+}
+
+
+//===================================================================
+//  TESTING
+//===================================================================
+
+void ANI_Print_Frame_List( int index )
+{
+    int i;
+    for( i = 0; animation[index]->frame_list[i] != -1; i++ )
+    {
+        printf( "%d\t", animation[index]->frame_list[i] );
     }
 
     return;

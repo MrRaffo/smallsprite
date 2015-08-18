@@ -42,7 +42,7 @@ typedef struct anim_s anim_type;
 void    ANI_Add_Animation();
 
 // remove last animation
-void    ANI_Remove_Animation();
+void    ANI_Remove_Animation( int index );
 
 // add frame to given animation
 int     ANI_Add_Frame( int anim_index, int value );
@@ -52,6 +52,9 @@ void    ANI_Remove_Frame( int anim_index );
 
 // return number of frames in an animation
 int     ANI_Get_Number_Of_Frames( int anim_index );
+
+// return index of a given frame in a given animation, -1 on fail
+int     ANI_Get_Frame( int anim_index, int frame_index );
 
 // return the number of animations
 int     ANI_Get_Number_Of_Animations();
@@ -63,6 +66,7 @@ void    ANI_Free();
 //  TESTING AND DEBUGING
 //===================================================================
 
+void ANI_Print_Frame_List( int index );
 
 
 #endif  // __anim_h__

@@ -76,7 +76,8 @@ int main( int argc, char *argv[] )
 
     SPR_Add_Sprite();
     ANI_Add_Animation();
-    
+    ANI_Add_Frame( 0, 0 );
+
     int running = 1;            // loop control
     unsigned int start_time;
     unsigned int end_time;
@@ -120,8 +121,10 @@ int main( int argc, char *argv[] )
     // free sprite memory
     SPR_Free();
 
+
+    ANI_Print_Frame_List( 0 );
     // free animation data
-    // ANI_Free();
+    ANI_Free();
 
     // free graphics memory and shut down SDL
     GRA_Close(); 

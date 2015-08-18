@@ -288,10 +288,21 @@ void Set_Animation_Label_Text()
 }
 
 // drawing a sprite preview (64x64 pixels) for the grid and animation preview areas
-static void Draw_Sprite_Preview( int x, int y, int sprite_index )
+static void Draw_Sprite_Preview( int x, int y, int sprite_index, int use_palette )
 {
     int i, dx, dy;
-    int palette_index = SPR_Get_Sprite_Palette_Index( sprite_index );
+    int palette_index;
+    
+    // check whether to use the sprites individual palette or current selected
+    // (use selected palette for animations)
+    if( use_palette )
+    {
+        palette_index = SPR_Get_Sprite_Palette_Index( sprite_index );
+    }
+    else
+    {
+        palette_index = selected_palette_index;
+    }
 
     for( i = 0; i < SPRITE_SIZE; i++ )
     {
@@ -425,7 +436,7 @@ static void Draw_Sprite_Grid()
 
         Draw_Sprite_Preview (   GUI_AREA_SPRITE_GRID_X + cur_x*GUI_SPRITE_W,
                                 GUI_AREA_SPRITE_GRID_Y + cur_y*GUI_SPRITE_H,
-                                cur_sprite
+                                cur_sprite, 1
                             );
     }
 
@@ -481,7 +492,20 @@ void Draw_Animation_Editor()
                                 V_DARK_GREY
                              );
 
-    // TODO - Draw Sprites/Frames
+    // TODO add 'base' value for scrolled (see grid scroller code)
+    int i, frame = 0;
+    for( i = 0; i < GUI_AREA_ANIM_FRAMES && frame >= 0; i++ )
+    {
+        if( ( frame = ANI_Get_Frame( anim_index, i ) ) >= 0 )
+        {
+            Draw_Sprite_Preview(    GUI_AREA_ANIM_EDIT_X + i*GUI_SPRITE_W,
+                                    GUI_AREA_ANIM_EDIT_Y,
+                                    ANI_Get_Frame( anim_index, i ),
+                                    0
+                               );
+        }
+    }
+
 
     int col;
 
@@ -649,7 +673,7 @@ void BTN_Add_Anim()
 
 void BTN_Remove_Anim()
 {
-    ANI_Remove_Animation();
+    ANI_Remove_Animation( anim_index );
 
     anim_total = ANI_Get_Number_Of_Animations()-1;
     Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
@@ -661,6 +685,17 @@ void BTN_Remove_Anim()
     }
 
     return;
+}
+
+
+void BTN_Add_Frame()
+{
+    ANI_Add_Frame( anim_index, sprite_grid_index );
+}
+
+void BTN_Remove_Frame()
+{
+    ANI_Remove_Frame( anim_frame_index  );
 }
 
 
@@ -920,6 +955,17 @@ int GUI_Init()
                         BTN_Remove_Anim
                     );
 
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 256,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        96, 24, "ADD FRAME",
+                        BTN_Add_Frame
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 256,
+                        GUI_AREA_ANIM_CONTROL_Y + 32,
+                        96, 24, "REM FRAME",
+                        BTN_Remove_Frame
+                    );
 
     return 1;
 };
