@@ -76,7 +76,7 @@ int main( int argc, char *argv[] )
 
     SPR_Add_Sprite();
     ANI_Add_Animation();
-    ANI_Add_Frame( 0, 0 );
+    ANI_Add_Frame( 0 );
 
     int running = 1;            // loop control
     unsigned int start_time;

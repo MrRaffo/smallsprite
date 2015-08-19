@@ -206,6 +206,8 @@ struct scr_button_s     {
                             int             active;
                             int             visible;
                             
+                            int             delay;
+
                             int             x;
                             int             y;
 
@@ -228,6 +230,8 @@ struct scr_button_s     {
 struct scr_switch_s     {
                             int             active;
                             int             visible;
+
+                            int             delay;              // length in frames to deactivate btn
 
                             int             x;
                             int             y;

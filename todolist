@@ -1,19 +1,7 @@
 This is a checklist of planned features with notes on how to implement them
  
+Add scrolling to animation player
 
-ANIMATION FEATURES
+Fix anim_frame_index being incorrent after ANI_Remove_Frame and ANI_Delete_Frame calls
 
-    Complete gui for animation controls including highlighting current frame
-
-    Add anim.c and anim.h with anim_type structs and relative functions
-
-    Add ability to create and remove animations
-
-    Add ability to add selected sprite definitions to current animation
-
-    Add relevent buttons to for animation editing including
-        - increasing number of frames in the animation
-        - reducing the number of frames in the animation
-        - consided adding ability to scroll frames, de facto removing max frame cap
-    
-    Decide whether an animation should use one palette or each sprites palette (1 is practical)
+Complete Animation Preview Player

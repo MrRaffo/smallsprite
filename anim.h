@@ -45,10 +45,18 @@ void    ANI_Add_Animation();
 void    ANI_Remove_Animation( int index );
 
 // add frame to given animation
-int     ANI_Add_Frame( int anim_index, int value );
+int     ANI_Add_Frame( int anim_index );
+
+
+// set a frame to a given sprite definition
+void    ANI_Set_Frame( int anim_index, int frame_index, int value );
+
 
 // remove last frame from given animation
-void    ANI_Remove_Frame( int anim_index );
+void    ANI_Delete_Frame( int anim_index );
+
+// remove given frame from animation
+void    ANI_Remove_Frame( int anim_index, int frame_index );
 
 // return number of frames in an animation
 int     ANI_Get_Number_Of_Frames( int anim_index );

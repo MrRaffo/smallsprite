@@ -494,16 +494,13 @@ void Draw_Animation_Editor()
 
     // TODO add 'base' value for scrolled (see grid scroller code)
     int i, frame = 0;
-    for( i = 0; i < GUI_AREA_ANIM_FRAMES && frame >= 0; i++ )
+    for( i = 0; i < GUI_AREA_ANIM_FRAMES && (frame = ( ANI_Get_Frame( anim_index, i ) ) >= 0 ); i++ )
     {
-        if( ( frame = ANI_Get_Frame( anim_index, i ) ) >= 0 )
-        {
-            Draw_Sprite_Preview(    GUI_AREA_ANIM_EDIT_X + i*GUI_SPRITE_W,
-                                    GUI_AREA_ANIM_EDIT_Y,
-                                    ANI_Get_Frame( anim_index, i ),
-                                    0
-                               );
-        }
+        Draw_Sprite_Preview (   GUI_AREA_ANIM_EDIT_X + i*GUI_SPRITE_W,
+                                GUI_AREA_ANIM_EDIT_Y,
+                                ANI_Get_Frame( anim_index, i ),
+                                0
+                            );
     }
 
 
@@ -690,12 +687,28 @@ void BTN_Remove_Anim()
 
 void BTN_Add_Frame()
 {
-    ANI_Add_Frame( anim_index, sprite_grid_index );
+    ANI_Add_Frame( anim_index );
+}
+
+void BTN_Delete_Frame()
+{
+    ANI_Delete_Frame( anim_index  );
+}
+
+void BTN_Set_Frame()
+{
+    ANI_Set_Frame( anim_index, anim_frame_index, sprite_grid_index );
 }
 
 void BTN_Remove_Frame()
 {
-    ANI_Remove_Frame( anim_frame_index  );
+    ANI_Remove_Frame( anim_index, anim_frame_index );
+
+    int frames = ANI_Get_Number_Of_Frames( anim_index );
+    if( anim_frame_index >= frames )
+    {
+        anim_frame_index = frames-1;
+    }
 }
 
 
@@ -844,6 +857,23 @@ static void Input_Sprite_Grid( int button, int x, int y )
     return;
 }
 
+
+static void Input_Anim_Edit( int button, int x, int y )
+{
+    if( button == 1 )
+    {
+        Get_Relative_Position( AREA_SPRITE_GRID, &x, &y );
+
+        anim_frame_index = ( x / GUI_SPRITE_W ) + anim_frame_base;
+
+        int frames = ANI_Get_Number_Of_Frames( anim_index );
+        if( anim_frame_index > frames )
+        {
+            anim_frame_index = frames;
+        }
+    }
+}
+
 //=====================================================================
 //  PUBLIC FUNCTIONS
 //=====================================================================
@@ -933,8 +963,8 @@ int GUI_Init()
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X,
                         GUI_AREA_ANIM_CONTROL_Y,
-                        96, 24, "PREV ANIM",
-                        BTN_Prev_Anim
+                        96, 24, "ADD ANIM",
+                        BTN_Add_Anim
                     );
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 128,
@@ -945,14 +975,14 @@ int GUI_Init()
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X,
                         GUI_AREA_ANIM_CONTROL_Y + 32,
-                        96, 24, "ADD ANIM",
-                        BTN_Add_Anim
+                        96, 24, "REM ANIM",
+                        BTN_Remove_Anim
                     );
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 128,
                         GUI_AREA_ANIM_CONTROL_Y + 32,
-                        96, 24, "REM ANIM",
-                        BTN_Remove_Anim
+                        96, 24, "PREV ANIM",
+                        BTN_Prev_Anim
                     );
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 256,
@@ -962,6 +992,18 @@ int GUI_Init()
                     );
 
     GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 256,
+                        GUI_AREA_ANIM_CONTROL_Y + 32,
+                        96, 24, "DEL FRAME",
+                        BTN_Delete_Frame
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 384,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        96, 24, "SET FRAME",
+                        BTN_Set_Frame
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 384,
                         GUI_AREA_ANIM_CONTROL_Y + 32,
                         96, 24, "REM FRAME",
                         BTN_Remove_Frame
@@ -1060,6 +1102,10 @@ void GUI_Get_Mouse_Input()
         
         case AREA_SPRITE_GRID:
             Input_Sprite_Grid ( m_button, mouse_x, mouse_y );
+            break;
+
+        case AREA_ANIM_EDIT:
+            Input_Anim_Edit   ( m_button, mouse_x, mouse_y );
             break;
 
         default:

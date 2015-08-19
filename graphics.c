@@ -756,7 +756,7 @@ uint32_t GRA_Get_Mouse_State( int *x, int *y )
 #define     GUI_ACTIVE_COLOR            0xffffffff                // WHITE
 #define     GUI_HOVER_COLOR             0xffb08000                // CYAN
 #define     GUI_DISABLED_COLOR          0xff808080                // GREY
-
+#define     BUTTON_DELAY                16                        // 16 frame delay
 
 // used to check if user is using buttons/gui
 int         mouse_x = 0;
@@ -802,6 +802,8 @@ int GRA_Make_Button( int x, int y, int w, int h, char *label, void (*function)(v
     // button is active and visible by default
     buttons[button_p]->active    = 1;
     buttons[button_p]->visible   = 1;
+
+    buttons[button_p]->delay     = 0;
 
     // set default colors (TODO add functions to change these)
     buttons[button_p]->active_color          = GUI_ACTIVE_COLOR;
@@ -949,6 +951,14 @@ void GRA_Press_Button( int index )
         return;
     }
 
+    if( buttons[index]->active == 0 )
+    {
+        return;
+    }
+
+    buttons[index]->delay = BUTTON_DELAY;
+    buttons[index]->active = 0;
+
     buttons[index]->function();
     return;
 }
@@ -993,6 +1003,18 @@ void GRA_Check_User_Input()
     // check if mouse is over any button
     for( i = 0; i < button_p; i++ )
     {
+        // prepare to reset pressed buttons
+        if( buttons[i]->active == 0 )
+        {
+            buttons[i]->delay--;
+            if( buttons[i]->delay < 1 )
+            {
+                buttons[i]->delay = 0;
+                buttons[i]->active = 1;
+                buttons[i]->current_color = buttons[i]->disabled_color;
+            }
+        }
+
         if( mouse_x > buttons[i]->x && mouse_x < (buttons[i]->x + buttons[i]->width) &&
             mouse_y > buttons[i]->y && mouse_y < (buttons[i]->y + buttons[i]->height) && buttons[i]->active )
         {
@@ -1008,7 +1030,15 @@ void GRA_Check_User_Input()
         else
         {
             // show button is not highlighted
-            buttons[i]->current_color = buttons[i]->active_color;
+            if( buttons[i]->active )
+            {
+                buttons[i]->current_color = buttons[i]->active_color;
+            }
+            else
+            {
+                buttons[i]->current_color = buttons[i]->disabled_color;
+            }
+
         }
     }
 

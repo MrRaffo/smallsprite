@@ -80,9 +80,9 @@ void    ANI_Remove_Animation( int index )
     return;
 }
 
-// TODO - this is a mix of Add_Frame and Set_Frame - fix
+
 // add frame to current animation, return 1 on success
-int     ANI_Add_Frame( int anim_index, int value )
+int     ANI_Add_Frame( int anim_index )
 {
     if( anim_index < 0 || anim_index >= no_of_animations )
     {
@@ -100,14 +100,69 @@ int     ANI_Add_Frame( int anim_index, int value )
         return 0;
     }
 
-    temp->frame_list[temp->no_of_frames++] = value;
+    temp->frame_list[temp->no_of_frames++] = 0;
 
     return 1;
 }
 
 
+// set the given frame in the animation to the desired sprite definition
+void    ANI_Set_Frame( int anim_index, int frame_index, int value )
+{
+    if( anim_index < 0 || anim_index >= no_of_animations )
+    {
+        UTI_Print_Debug( "Invalid anim_index" );
+        return;
+    }
+
+    anim_type *temp;
+    temp = animation[anim_index];
+
+    if( frame_index < 0 || frame_index > temp->no_of_frames )
+    {
+        UTI_Print_Debug( "Invalid frame_index" );
+        return;
+    }
+
+    if( value < 0 )
+    {
+        UTI_Print_Debug( "Invalid value" );
+        return;
+    }
+
+    temp->frame_list[frame_index] = value;
+
+    return;
+}
+
+
+void    ANI_Remove_Frame( int anim_index, int frame_index )
+{
+    if( anim_index < 0 || anim_index >= no_of_animations )
+    {
+        UTI_Print_Error( "Invalid animation index" );
+        return;
+    }
+
+    anim_type *temp;
+    temp = animation[anim_index];
+
+    if( frame_index < 0 || frame_index > temp->no_of_frames )
+    {
+        UTI_Print_Error( "Invalid frame index" );
+        return;
+    }
+
+    for( ; frame_index <= temp->no_of_frames; frame_index++ )
+    {
+        temp->frame_list[frame_index] = temp->frame_list[frame_index+1];
+    }
+
+    return;
+}
+
 // remove last frame from current animation
-void    ANI_Remove_Frame( int anim_index )
+void    ANI_Delete_Frame( int anim_index )
 {
     if( anim_index < 0 || anim_index >= no_of_animations )
     {
@@ -152,7 +207,6 @@ int     ANI_Get_Frame( int anim_index, int frame_index )
 
     if( frame_index < 0 || frame_index > ( temp->no_of_frames ) )
     {
-        UTI_Print_Debug( "Invalid frame index" );
         return -1;
     }
 
@@ -194,6 +248,8 @@ void ANI_Print_Frame_List( int index )
     {
         printf( "%d\t", animation[index]->frame_list[i] );
     }
+
+    putchar( '\n' );
 
     return;
 }
