@@ -239,6 +239,120 @@ void    ANI_Free()
 }
 
 
+//=============================
+//  PLAYER
+//=============================
+
+#define MAX_DELAY               1024
+
+anim_type       *current_anim = NULL;
+
+int     current_animation = 0;
+int     current_frame = 0;
+int     playing = 0;
+int     frame_delay = 1;                    // speed of animation cycle, lower is faster
+int     frame_timer = 0;
+int     loop = 0;
+
+
+void    ANI_Play_Animation( int anim_index )
+{
+    if( anim_index < 0 || anim_index > no_of_animations )
+    {
+        UTI_Print_Debug( "Invalid animation index" );
+        return;
+    }
+
+    current_anim = animation[anim_index];
+    current_frame = 0;
+    frame_timer = frame_delay;
+
+    playing = 1;
+}
+
+void    ANI_Stop_Animation()
+{
+    playing = 0;
+}
+
+
+void    ANI_Update_Animation()
+{
+    // this is called every frame, handles most of the animation
+    if( playing == 0 )
+    {
+        return;
+    }
+
+    // check if its time to update the animation cycle
+    --frame_timer;
+    if( frame_timer <= 0 )
+    {
+        current_frame++;
+        if( current_anim->frame_list[current_frame] < 0 )
+        {
+            current_frame = 0;
+
+            // we've reached a negative index, the end of the cycle
+            playing = ( loop == 1 ) ? 1 : 0;
+        }
+
+        frame_timer = frame_delay;
+    }
+
+    return;
+}
+
+
+void    ANI_Loop_Toggle()
+{
+    loop = ( loop == 0 ) ? 1 : 0;
+
+    return;
+}
+
+
+void    ANI_Speed_Up()
+{
+    if( frame_delay > 1 )
+    {
+        frame_delay--;
+    }
+    else
+    {
+        frame_delay = 1;
+    }
+
+    return;
+}
+
+
+void    ANI_Speed_Down()
+{
+    if( frame_delay < MAX_DELAY )
+    {
+        frame_delay++;
+    }
+    else
+    {
+        frame_delay = MAX_DELAY;
+    }
+
+    return;
+}
+
+
+int     ANI_Get_Current_Frame()
+{
+    return current_frame;
+}
+
+
+int     *ANI_Get_Loop_Address()
+{
+    return &loop;
+}
+
 //===================================================================
 //  TESTING
 //===================================================================

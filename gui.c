@@ -527,6 +527,20 @@ void Draw_Animation_Editor()
     return;
 }
 
+
+void Draw_Animation_Player()
+{
+    int frame = ANI_Get_Current_Frame();
+
+    Draw_Sprite_Preview (   GUI_AREA_ANIM_PLAYER_X,
+                            GUI_AREA_ANIM_PLAYER_Y,
+                            frame,
+                            selected_palette_index
+                        );
+
+    return;
+}
+
 //======================
 //  BUTTON FUNCTIONS
 //======================
@@ -722,6 +736,34 @@ void BTN_Scroll_Anim_Left()
 {
     anim_frame_base > 0 ? anim_frame_base-- : 0;
 }
+
+    //== ANIM PLAYER ==//
+
+void BTN_Play_Animation()
+{
+    ANI_Play_Animation( anim_index );
+}
+
+void BTN_Stop_Animation()
+{
+    ANI_Stop_Animation();
+}
+
+void BTN_Speed_Up()
+{
+    ANI_Speed_Up();
+}
+
+void BTN_Speed_Down()
+{
+    ANI_Speed_Down();
+}
+
+void SWT_Loop_Toggle()
+{
+    ANI_Loop_Toggle();
+}
+
 
 //======================
 //  INPUT FUNCTIONS
@@ -1032,6 +1074,40 @@ int GUI_Init()
                         BTN_Scroll_Anim_Right
                     );
 
+    //== ANIMATION PLAYER ==//
+
+    GRA_Make_Button (   GUI_AREA_ANIM_PLAYER_X,
+                        GUI_AREA_ANIM_PLAYER_Y + GUI_AREA_ANIM_PLAYER_H + 16,
+                        24, 24, "X",
+                        BTN_Stop_Animation
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_PLAYER_X + 38,
+                        GUI_AREA_ANIM_PLAYER_Y + GUI_AREA_ANIM_PLAYER_H + 16,
+                        24, 24, ">",
+                        BTN_Play_Animation
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_PLAYER_X,
+                        GUI_AREA_ANIM_PLAYER_Y + GUI_AREA_ANIM_PLAYER_H + 48,
+                        24, 24, "<<",
+                        BTN_Speed_Down
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_PLAYER_X + 38,
+                        GUI_AREA_ANIM_PLAYER_Y + GUI_AREA_ANIM_PLAYER_H + 48,
+                        24, 24, ">>",
+                        BTN_Speed_Up
+                    );
+
+    int *loop;
+    loop = ANI_Get_Loop_Address();
+
+    GRA_Make_Switch (   GUI_AREA_ANIM_PLAYER_X,
+                        GUI_AREA_ANIM_PLAYER_Y - 32,
+                        'X', loop
+                    );
+
     return 1;
 };
 
@@ -1046,11 +1122,13 @@ void GUI_Draw_Interface()
     Draw_Sprite_Grid();
 
     Draw_Animation_Editor();
+    Draw_Animation_Player();
 
     Set_Palette_Index_Text();
     Set_Animation_Label_Text();
 
     GRA_Draw_Buttons();
+    GRA_Draw_Switches();
 
     return;
 }

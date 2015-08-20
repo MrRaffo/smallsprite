@@ -88,6 +88,8 @@ int main( int argc, char *argv[] )
         // clear screen for next render
         GRA_Clear_Screen();
 
+        ANI_Update_Animation();
+
         // draw the user interface
         GUI_Draw_Interface();
         GUI_Draw_Edit_Sprite();

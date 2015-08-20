@@ -70,6 +70,27 @@ int     ANI_Get_Number_Of_Animations();
 // free used memory TODO needs fixed
 void    ANI_Free();
 
+
+//=============================
+//  PLAYER
+//=============================
+
+void    ANI_Play_Animation( int anim_index );
+
+void    ANI_Stop_Animation();
+
+void    ANI_Update_Animation();
+
+void    ANI_Loop_Toggle();
+
+void    ANI_Speed_Up();
+
+void    ANI_Speed_Down();
+
+int     *ANI_Get_Loop_Address();
+
+int     ANI_Get_Current_Frame();
+
 //===================================================================
 //  TESTING AND DEBUGING
 //===================================================================
