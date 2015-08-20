@@ -158,6 +158,8 @@ void    ANI_Remove_Frame( int anim_index, int frame_index )
         temp->frame_list[frame_index] = temp->frame_list[frame_index+1];
     }
 
+    temp->no_of_frames--;
+
     return;
 }
 

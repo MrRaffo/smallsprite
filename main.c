@@ -121,8 +121,6 @@ int main( int argc, char *argv[] )
     // free sprite memory
     SPR_Free();
 
-
-    ANI_Print_Frame_List( 0 );
     // free animation data
     ANI_Free();
 

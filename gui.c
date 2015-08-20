@@ -494,11 +494,12 @@ void Draw_Animation_Editor()
 
     // TODO add 'base' value for scrolled (see grid scroller code)
     int i, frame = 0;
-    for( i = 0; i < GUI_AREA_ANIM_FRAMES && (frame = ( ANI_Get_Frame( anim_index, i ) ) >= 0 ); i++ )
+    for( i = 0; i < GUI_AREA_ANIM_FRAMES && 
+                ( ( frame =  ANI_Get_Frame( anim_index, i+anim_frame_base ) ) >= 0 ); i++ )
     {
         Draw_Sprite_Preview (   GUI_AREA_ANIM_EDIT_X + i*GUI_SPRITE_W,
                                 GUI_AREA_ANIM_EDIT_Y,
-                                ANI_Get_Frame( anim_index, i ),
+                                frame,
                                 0
                             );
     }
@@ -516,7 +517,7 @@ void Draw_Animation_Editor()
     }
 
     // hightlight selected frame
-    GRA_Draw_Hollow_Rectangle(  GUI_AREA_ANIM_EDIT_X + anim_frame_index * GUI_SPRITE_W,
+    GRA_Draw_Hollow_Rectangle(  GUI_AREA_ANIM_EDIT_X + (anim_frame_index - anim_frame_base) * GUI_SPRITE_W,
                                 GUI_AREA_ANIM_EDIT_Y,
                                 GUI_SPRITE_W,
                                 GUI_SPRITE_H,
@@ -712,6 +713,16 @@ void BTN_Remove_Frame()
 }
 
 
+void BTN_Scroll_Anim_Right()
+{
+    anim_frame_base < (1024-GUI_AREA_ANIM_FRAMES) ? anim_frame_base++ : anim_frame_base ;
+}
+
+void BTN_Scroll_Anim_Left()
+{
+    anim_frame_base > 0 ? anim_frame_base-- : 0;
+}
+
 //======================
 //  INPUT FUNCTIONS
 //======================
@@ -867,9 +878,9 @@ static void Input_Anim_Edit( int button, int x, int y )
         anim_frame_index = ( x / GUI_SPRITE_W ) + anim_frame_base;
 
         int frames = ANI_Get_Number_Of_Frames( anim_index );
-        if( anim_frame_index > frames )
+        if( anim_frame_index >= frames )
         {
-            anim_frame_index = frames;
+            anim_frame_index = frames-1;
         }
     }
 }
@@ -1007,6 +1018,18 @@ int GUI_Init()
                         GUI_AREA_ANIM_CONTROL_Y + 32,
                         96, 24, "REM FRAME",
                         BTN_Remove_Frame
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 578,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        24, 24, "<",
+                        BTN_Scroll_Anim_Left
+                    );
+
+    GRA_Make_Button (   GUI_AREA_ANIM_CONTROL_X + 616,
+                        GUI_AREA_ANIM_CONTROL_Y,
+                        24, 24, ">",
+                        BTN_Scroll_Anim_Right
                     );
 
     return 1;

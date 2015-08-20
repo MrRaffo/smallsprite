@@ -1,7 +1,7 @@
 This is a checklist of planned features with notes on how to implement them
  
-Add scrolling to animation player
-
-Fix anim_frame_index being incorrent after ANI_Remove_Frame and ANI_Delete_Frame calls
-
 Complete Animation Preview Player
+    Controls
+    Varying Play Speeds
+
+Add file loading and saving

@@ -756,7 +756,7 @@ uint32_t GRA_Get_Mouse_State( int *x, int *y )
 #define     GUI_ACTIVE_COLOR            0xffffffff                // WHITE
 #define     GUI_HOVER_COLOR             0xffb08000                // CYAN
 #define     GUI_DISABLED_COLOR          0xff808080                // GREY
-#define     BUTTON_DELAY                16                        // 16 frame delay
+#define     BUTTON_DELAY                8                        // frame delay
 
 // used to check if user is using buttons/gui
 int         mouse_x = 0;
