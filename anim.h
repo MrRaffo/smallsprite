@@ -38,6 +38,9 @@ typedef struct anim_s anim_type;
 //===================================================================
 
 
+// creates an animation and sets current_anim pointer
+void    ANI_Init_Animation();
+
 // add a new animation
 void    ANI_Add_Animation();
 
@@ -70,7 +73,6 @@ int     ANI_Get_Number_Of_Animations();
 // free used memory TODO needs fixed
 void    ANI_Free();
 
-
 //=============================
 //  PLAYER
 //=============================
@@ -90,6 +92,16 @@ void    ANI_Speed_Down();
 int     *ANI_Get_Loop_Address();
 
 int     ANI_Get_Current_Frame();
+
+//==============================
+//  File I/O
+//==============================
+
+// retrieve data pointer for saving to file
+anim_type   *ANI_Get_Animation( int index );
+
+// takes a pointer of data loaded from file
+int         ANI_Load_Animation( int32_t *anim, int no_of_frames, int speed );
 
 //===================================================================
 //  TESTING AND DEBUGING

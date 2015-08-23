@@ -165,6 +165,30 @@ void SPR_Free()
     return;
 }
 
+
+//=============================
+//  FILE I/O
+//=============================
+
+// return pointer to the sprite definition
+uint8_t         *SPR_Get_Sprite( int index )
+{
+    if( index >= 0 && index < no_of_sprites )
+    {
+        return sprite[index]->definition;
+    }
+
+    return NULL;
+}
+
+// load from file
+int             SPR_Load_Sprite( sprite_type *definition )
+{
+    // TODO
+    return 1;
+}
+
+
 //================================
 //  TESTING AND DEBUG
 //================================

@@ -68,6 +68,16 @@ void SPR_Set_Sprite_Palette_Index( int sprite_index, int palette_index );
 void SPR_Free();
 
 
+//=============================
+//  FILE I/O
+//=============================
+
+// return pointer to the sprite definition
+uint8_t         *SPR_Get_Sprite( int index );
+
+// load from file
+int             SPR_Load_Sprite( sprite_type *definition );
+
 //===================================
 //  TESTING AND DEBUG
 //===================================

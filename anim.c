@@ -147,7 +147,7 @@ void    ANI_Remove_Frame( int anim_index, int frame_index )
     anim_type *temp;
     temp = animation[anim_index];
 
-    if( frame_index < 0 || frame_index > temp->no_of_frames )
+    if( frame_index < 1 || frame_index > temp->no_of_frames )
     {
         UTI_Print_Error( "Invalid frame index" );
         return;
@@ -175,9 +175,9 @@ void    ANI_Delete_Frame( int anim_index )
     anim_type *temp;
     temp = animation[anim_index];
 
-    if( temp->no_of_frames > 0 )
+    if( temp->no_of_frames > 1 )
     {
-        temp->frame_list[temp->no_of_frames--] = -1;
+        temp->frame_list[--(temp->no_of_frames)] = -1;
     }
 
     return;
@@ -254,6 +254,13 @@ int     frame_delay = 1;                    // speed of animation cycle, lower i
 int     frame_timer = 0;
 int     loop = 0;
 
+void    ANI_Init_Animation()
+{
+    ANI_Add_Animation();
+    ANI_Add_Frame( 0 );
+
+    current_anim = animation[0];
+}
 
 void    ANI_Play_Animation( int anim_index )
 {
@@ -342,16 +349,41 @@ void    ANI_Speed_Down()
 }
 
 
-int     ANI_Get_Current_Frame()
-{
-    return current_frame;
-}
-
-
 int     *ANI_Get_Loop_Address()
 {
     return &loop;
 }
+
+
+int     ANI_Get_Current_Frame()
+{
+    return current_anim->frame_list[current_frame];
+}
+
+
+//==============================
+//  File I/O
+//==============================
+
+// retrieve data pointer for saving to file
+anim_type   *ANI_Get_Animation( int index )
+{
+    if( index >= 0 && index < no_of_animations )
+    {
+        return animation[index];
+    }
+
+    return NULL;
+}
+
+// takes a pointer of data loaded from file
+int         ANI_Load_Animation( int32_t *frames, int no_of_frames, int speed )
+{
+    // TODO
+
+    return 1;
+}
+
 
 //===================================================================
 //  TESTING

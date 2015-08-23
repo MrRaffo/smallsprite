@@ -10,7 +10,7 @@
 #include "palette.h"
 #include "sprite.h"
 #include "anim.h"
-
+#include "file.h"
 
 //====================================================================
 //  CONSTANTS
@@ -50,7 +50,10 @@
 
 int main( int argc, char *argv[] )
 {
-    
+ 
+    // parse arguments
+    FIL_Parse_Arguments( argc, argv );
+
     // CREATE DISPLAY
     if( GRA_Create_Display( "SmallSprite",  WINDOW_WIDTH, WINDOW_HEIGHT, 
                                             WINDOW_WIDTH, WINDOW_HEIGHT ) == 0 )
@@ -75,8 +78,7 @@ int main( int argc, char *argv[] )
 
 
     SPR_Add_Sprite();
-    ANI_Add_Animation();
-    ANI_Add_Frame( 0 );
+    ANI_Init_Animation();
 
     int running = 1;            // loop control
     unsigned int start_time;
@@ -117,6 +119,12 @@ int main( int argc, char *argv[] )
 
     // SPR_DEBUG_Show_Sprite( 0 );
 
+    // write the file
+    if( FIL_Write_File() == 0 )
+    {
+        printf( "Error writing file\n" );
+    }
+
     // free palette memory
     PAL_Free();
 
@@ -125,6 +133,7 @@ int main( int argc, char *argv[] )
 
     // free animation data
     ANI_Free();
+
 
     // free graphics memory and shut down SDL
     GRA_Close(); 

@@ -642,7 +642,7 @@ void BTN_Remove_Sprite()
 
     if( sprite_grid_index >= ( no_of_sprites = SPR_Get_Number_Of_Sprites() ) )
     {
-        sprite_grid_index = no_of_sprites - 1;
+        sprite_grid_index = no_of_sprites;
     }
 
     return;
@@ -950,7 +950,7 @@ int GUI_Init()
    
     area_color[AREA_SPRITE_EDIT]                        = LIGHT_GREY;
     area_color[AREA_SPRITE_GRID]                        = DARK_GREY;
-    area_color[AREA_SPRITE_GRID_SCROLL]                 = DARK_GREY;
+    area_color[AREA_SPRITE_GRID_SCROLL]                 = WHITE;
     area_color[AREA_MAIN_PALETTE]                       = LIGHT_GREY;
     area_color[AREA_USER_PALETTE]                       = INVIS;
     area_color[AREA_ANIM_EDIT]                          = DARK_GREY;
@@ -1129,7 +1129,15 @@ void GUI_Draw_Interface()
 
     GRA_Draw_Buttons();
     GRA_Draw_Switches();
+    
 
+    // the bottom row of sprites overwrites the bottom line of the border
+    GRA_Draw_Hollow_Rectangle(  area_pos_x[AREA_SPRITE_GRID]-1,
+                                area_pos_y[AREA_SPRITE_GRID]-1,
+                                area_w[AREA_SPRITE_GRID]+1,
+                                area_h[AREA_SPRITE_GRID]+2,
+                                area_color[AREA_SPRITE_GRID]
+                             );
     return;
 }
 
