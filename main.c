@@ -76,6 +76,7 @@ int main( int argc, char *argv[] )
     // INITIALIZE GUI
     GUI_Init();
 
+    FIL_Open_File();
 
     SPR_Add_Sprite();
     ANI_Init_Animation();

@@ -48,8 +48,11 @@ void     ANI_Add_Animation()
 
         animation[no_of_animations]->frame_wait = 1;
         animation[no_of_animations]->no_of_frames = 0;
-
+        
         no_of_animations++;
+
+        ANI_Add_Frame( no_of_animations-1 );
+
  
         return;
     }
@@ -257,8 +260,6 @@ int     loop = 0;
 void    ANI_Init_Animation()
 {
     ANI_Add_Animation();
-    ANI_Add_Frame( 0 );
-
     current_anim = animation[0];
 }
 

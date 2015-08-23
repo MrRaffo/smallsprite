@@ -6,6 +6,7 @@
 #include "utility.h"
 #include "anim.h"           // for 'anim_type' definition
 #include "sprite.h"
+#include "palette.h"
 #include "file.h"
 
 //====================================================================
@@ -57,7 +58,6 @@ void        FIL_Parse_Arguments( int m_argc, char *m_argv[] )
         UTI_Quiet_Exit( 1 );
     }
 
-    printf( "TEST 1\n" );
     // check filename is the first argument passed
     if( argv[1][0] == '-' )
     {
@@ -86,6 +86,8 @@ int         FIL_Open_File()
         return 0;
     }
 
+    // TODO - read entire file to buffer, then parse
+
     fread( file_check, 4, 1, file );
     file_check[4] = '\0';
 
@@ -97,6 +99,19 @@ int         FIL_Open_File()
 
     // TODO
     // read all data from the file
+
+    rewind( file );
+
+    file_header_type        *header = NULL;
+    header = UTI_EC_Malloc( sizeof( file_header_type ) );
+
+    fread( header, sizeof( file_header_type ), 1, file );
+
+    printf( "File Specs: No of Sprites              = %d\n", header->no_of_sprites );
+    printf( "            No of Animations           = %d\n", header->no_of_animations );
+    printf( "            No of Palettes             = %d\n", header->no_of_palettes );
+
+    UTI_EC_Free( header );
 
     fclose( file );
 
@@ -121,9 +136,9 @@ int         FIL_Write_File()
     header = UTI_EC_Malloc( sizeof( file_header_type ) );
 
     strncpy( header->signature, SIGNATURE, 4 );
-    header->no_of_sprites = SPR_Get_Number_Of_Sprites();
-    header->no_of_animations = ANI_Get_Number_Of_Animations();
-    header->animation_offset = ( header->no_of_sprites * SPRITE_SIZE ) + sizeof( file_header_type );
+    header->no_of_sprites           = SPR_Get_Number_Of_Sprites();
+    header->no_of_animations        = ANI_Get_Number_Of_Animations();
+    header->no_of_palettes          = PAL_Get_Number_Of_Palettes();
 
     // write header
     fwrite( header, sizeof( file_header_type ), 1, file );
@@ -149,6 +164,10 @@ int         FIL_Write_File()
     printf( "Written data for %d sprite definitions\n", i );
 
     // get animation data
+
+
+    header->animation_offset = ftell( file );
+
     anim_type       *anim = NULL;
     for( i = 0; i < header->no_of_animations; i++ )
     {
@@ -161,13 +180,38 @@ int         FIL_Write_File()
         }
         else
         {
-            printf( "Null animation data pointer: %d\n", i );
+            printf( "Null animation data pointer: Index %d\n", i );
             error = 1;
             break;
         }
     }
     
     printf( "Written data for %d animations\n", i );
+
+    // write palette data
+    header->palette_offset = ftell( file );
+
+    user_palette_type *palette = NULL;
+    for( i = 0; i < header->no_of_palettes; i++ )
+    {
+        palette = PAL_Get_Palette( i );
+        if( palette != NULL )
+        {
+            fwrite( palette, PAL_USER_SIZE, 1, file );
+        }
+        else
+        {
+            printf( "Null palette data pointer: Index %d\n", i );
+            error = 1;
+            break;
+        }
+    }
+
+    printf( "Written data for %d palettes\n", i );
+
+    //re-write header, now that it has the palette and animation offsets
+    rewind( file );
+    fwrite( header, sizeof( header ), 1, file );
 
     UTI_EC_Free( header );
     fclose( file );

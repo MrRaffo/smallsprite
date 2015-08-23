@@ -223,6 +223,25 @@ int PAL_Set_Palette( int index )
 }
 
 
+int  PAL_Get_Number_Of_Palettes()
+{
+    return no_of_palettes;
+}
+
+
+// returns a pointer to the given palette index
+user_palette_type *PAL_Get_Palette( int index )
+{
+    if( index < 0 || index >= no_of_palettes )
+    {
+        UTI_Print_Error( "Invalid index" );
+        return NULL;
+    }
+
+    return user_palette[index];
+}
+
+
 // clean up mallocd memory
 void PAL_Free()
 {

@@ -70,6 +70,13 @@ int             PAL_Prev_Palette();
 // set the current_palette to the value passed, returns current_palette on success, -1 on fail
 int             PAL_Set_Palette( int index );
 
+
+int             PAL_Get_Number_Of_Palettes();
+
+// returns a pointer to the given palette index
+user_palette_type *PAL_Get_Palette( int index );
+
+
 // clean up mallocd memory
 void            PAL_Free();
 
