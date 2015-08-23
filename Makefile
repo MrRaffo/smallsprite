@@ -11,7 +11,7 @@ LINKS = -lSDL2 -lSDL2main -lm
 OUTPUT = smallsprite
 
 #INPUT
-INPUT = main.o utility.o graphics.o gui.o palette.o sprite.o anim.o
+INPUT = main.o utility.o graphics.o gui.o palette.o sprite.o anim.o file.o
 
 #FILES and DEPENDANCIES
 $(OUTPUT): $(INPUT)
@@ -37,6 +37,9 @@ sprite.o: sprite.c
 
 anim.o: anim.c
 	$(CC) anim.c $(FLAGS) $(LINKS) -c
+
+file.o: file.c
+	$(CC) file.c $(FLAGS) $(LINKS) -c
 
 clean:
 	rm -f $(INPUT)

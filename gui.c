@@ -535,7 +535,7 @@ void Draw_Animation_Player()
     Draw_Sprite_Preview (   GUI_AREA_ANIM_PLAYER_X,
                             GUI_AREA_ANIM_PLAYER_Y,
                             frame,
-                            selected_palette_index
+                            0
                         );
 
     return;
@@ -657,6 +657,7 @@ void BTN_Prev_Anim()
     {
         anim_index--;
         Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
+        anim_frame_index = 0;
     }
 
     return;
@@ -668,6 +669,7 @@ void BTN_Next_Anim()
     {
         anim_index++;
         Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+        anim_frame_index = 0;
     }
 
     return;

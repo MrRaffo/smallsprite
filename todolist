@@ -2,3 +2,5 @@ This is a checklist of planned features with notes on how to implement them
  
 
 Add file loading and saving
+
+Set animation play speed/ frame delay to each animation separately
