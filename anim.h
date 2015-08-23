@@ -48,7 +48,7 @@ void    ANI_Add_Animation();
 void    ANI_Remove_Animation( int index );
 
 // add frame to given animation
-int     ANI_Add_Frame( int anim_index );
+int     ANI_Add_Frame( int anim_index, int sprite_index );
 
 
 // set a frame to a given sprite definition

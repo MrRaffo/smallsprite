@@ -704,7 +704,7 @@ void BTN_Remove_Anim()
 
 void BTN_Add_Frame()
 {
-    ANI_Add_Frame( anim_index );
+    ANI_Add_Frame( anim_index, sprite_grid_index );
 }
 
 void BTN_Delete_Frame()

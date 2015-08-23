@@ -51,7 +51,7 @@ void     ANI_Add_Animation()
         
         no_of_animations++;
 
-        ANI_Add_Frame( no_of_animations-1 );
+        ANI_Add_Frame( no_of_animations-1, 0 );
 
  
         return;
@@ -85,7 +85,7 @@ void    ANI_Remove_Animation( int index )
 
 
 // add frame to current animation, return 1 on success
-int     ANI_Add_Frame( int anim_index )
+int     ANI_Add_Frame( int anim_index, int sprite_index  )
 {
     if( anim_index < 0 || anim_index >= no_of_animations )
     {
@@ -103,7 +103,7 @@ int     ANI_Add_Frame( int anim_index )
         return 0;
     }
 
-    temp->frame_list[temp->no_of_frames++] = 0;
+    temp->frame_list[temp->no_of_frames++] = sprite_index;
 
     return 1;
 }
