@@ -23,11 +23,11 @@
 //===================================================================
 
 struct      file_header_s { char            signature[4];
-                            uint32_t        no_of_sprites;
-                            uint32_t        no_of_animations; 
-                            uint32_t        no_of_palettes;
-                            uint32_t        animation_offset;
-                            uint32_t        palette_offset;
+                            int32_t        no_of_sprites;
+                            int32_t        no_of_animations; 
+                            int32_t        no_of_palettes;
+                            int32_t        animation_offset;
+                            int32_t        palette_offset;
                           };
 
 typedef     struct file_header_s file_header_type;

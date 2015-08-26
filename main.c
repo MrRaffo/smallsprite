@@ -70,7 +70,7 @@ int main( int argc, char *argv[] )
     // INITIALIZE PALETTE DATA AND GENERATE MAIN PALETTE
     PAL_Init();
     PAL_Generate_Main_Palette();
-    PAL_Add_User_Palette();
+    //PAL_Add_User_Palette();
 
 
     // INITIALIZE GUI
@@ -78,7 +78,6 @@ int main( int argc, char *argv[] )
 
     FIL_Open_File();
 
-    SPR_Add_Sprite();
     ANI_Init_Animation();
 
     int running = 1;            // loop control

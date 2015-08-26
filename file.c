@@ -78,7 +78,7 @@ int         FIL_Open_File()
     FILE *file = NULL;
     char file_check[5];
 
-    file = fopen( filename, "r" );
+    file = fopen( filename, "rb" );
     if( file == NULL )
     {
         // need to create new data
@@ -110,6 +110,54 @@ int         FIL_Open_File()
     printf( "File Specs: No of Sprites              = %d\n", header->no_of_sprites );
     printf( "            No of Animations           = %d\n", header->no_of_animations );
     printf( "            No of Palettes             = %d\n", header->no_of_palettes );
+    printf( "            Animation Offset           = %d\n", header->animation_offset );
+    printf( "            Palette Offset             = %d\n", header->palette_offset );
+
+    int i;      // generic counter
+
+    //======= EXTRACT SPRITE DEFINITION DATA =======//
+    sprite_type             *sprite_buffer = NULL;            // temp buffer
+    
+    for( i = 0; i < header->no_of_sprites; i++ )
+    {
+        sprite_buffer = UTI_EC_Malloc( sizeof( sprite_type ) );
+        fread( sprite_buffer, sizeof( sprite_type ), 1, file );
+        SPR_Load_Sprite( sprite_buffer );
+    }
+    // sprite_buffer malloc'd memory will be freed by SPR code
+
+    printf( "Header offset = %d\tFtell gives: %ld\n", header->animation_offset, ftell( file ) );
+
+
+    //======= EXTRACT ANIMATION DATA =======//
+    int32_t                 *frame_buffer = NULL, no_of_frames = 0, frame_wait = 0;
+    frame_buffer = UTI_EC_Malloc( sizeof( int32_t ) * MAX_ANIMATION_FRAMES );     // most ever needed
+
+    for( i = 0; i < header->no_of_animations; i++ )
+    {
+        fread( &no_of_frames, sizeof( int32_t ), 1, file );
+        fread( &frame_wait, sizeof( int32_t ), 1, file );
+        fread( frame_buffer, sizeof( int32_t ), no_of_frames, file );
+        ANI_Load_Animation( frame_buffer, no_of_frames, frame_wait );
+    }
+
+    UTI_EC_Free( frame_buffer );
+
+    //======= EXTRACT PALETTE DATA =======//
+
+    user_palette_type           *palette = NULL;
+
+    for( i = 0; i < header->no_of_palettes; i++ )
+    {
+        palette = UTI_EC_Malloc( sizeof( user_palette_type ) );
+        fread( palette, sizeof( user_palette_type ), 1, file );
+        if( palette != NULL )
+        {
+            PAL_Load_Palette( palette );
+        }
+    }
+
+    //======= FREE MEMORY =======//
 
     UTI_EC_Free( header );
 
@@ -124,7 +172,7 @@ int         FIL_Write_File()
     FILE *file = NULL;
     int error = 0;
 
-    file = fopen( filename, "w" );
+    file = fopen( filename, "wb" );
     if( file == NULL )
     {
         UTI_Print_Error( "Unable to create file" );
@@ -151,7 +199,7 @@ int         FIL_Write_File()
         data = SPR_Get_Sprite( i );
         if( data != NULL )
         {
-            fwrite( data, SPRITE_SIZE, 1, file );
+            fwrite( data, sizeof( sprite_type ), 1, file );
         }
         else
         {
@@ -167,6 +215,7 @@ int         FIL_Write_File()
 
 
     header->animation_offset = ftell( file );
+    printf( "Header -> anim_offset = %d\n", header->animation_offset );
 
     anim_type       *anim = NULL;
     for( i = 0; i < header->no_of_animations; i++ )

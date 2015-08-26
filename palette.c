@@ -241,6 +241,22 @@ user_palette_type *PAL_Get_Palette( int index )
     return user_palette[index];
 }
 
+//=======================================
+//  FILE I/O
+//=======================================
+
+int     PAL_Load_Palette( user_palette_type *palette )
+{
+    if( no_of_palettes >= PAL_MAX_USER_PALETTES-1 )
+    {
+        UTI_Print_Debug( "Unable to load palette, limit reached" );
+        return 0;
+    }
+
+    user_palette[no_of_palettes++] = palette;
+
+    return 1;
+}
 
 // clean up mallocd memory
 void PAL_Free()

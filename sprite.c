@@ -181,10 +181,17 @@ uint8_t         *SPR_Get_Sprite( int index )
     return NULL;
 }
 
-// load from file
+// take pointer from file
 int             SPR_Load_Sprite( sprite_type *definition )
 {
-    // TODO
+    if( no_of_sprites >= MAX_SPRITES )
+    {
+        UTI_Print_Debug( "Cannot add sprite, limit reached" );
+        return 0;
+    }
+
+    sprite[no_of_sprites++] = definition;
+
     return 1;
 }
 

@@ -76,6 +76,12 @@ int             PAL_Get_Number_Of_Palettes();
 // returns a pointer to the given palette index
 user_palette_type *PAL_Get_Palette( int index );
 
+//======================================
+//  FILE I/O
+//======================================
+
+// add a palette to the list
+int     PAL_Load_Palette( user_palette_type *palette );
 
 // clean up mallocd memory
 void            PAL_Free();

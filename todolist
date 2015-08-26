@@ -1,6 +1,6 @@
 This is a checklist of planned features with notes on how to implement them
  
+Add initiating code for new files
 
-Add file loading and saving
-
-Set animation play speed/ frame delay to each animation separately
+Animation player not switching animations automatically
+Bug : Deleting sprite from grid that exists in animation causes problems

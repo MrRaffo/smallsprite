@@ -259,7 +259,7 @@ int     loop = 0;
 
 void    ANI_Init_Animation()
 {
-    ANI_Add_Animation();
+    //ANI_Add_Animation();
     current_anim = animation[0];
 }
 
@@ -273,7 +273,7 @@ void    ANI_Play_Animation( int anim_index )
 
     current_anim = animation[anim_index];
     current_frame = 0;
-    frame_timer = frame_delay;
+    frame_timer = current_anim->frame_wait;
 
     playing = 1;
 }
@@ -282,6 +282,8 @@ void    ANI_Stop_Animation()
 {
     playing = 0;
 }
+
+
 
 
 void    ANI_Update_Animation()
@@ -305,7 +307,7 @@ void    ANI_Update_Animation()
             playing = ( loop == 1 ) ? 1 : 0;
         }
 
-        frame_timer = frame_delay;
+        frame_timer = current_anim->frame_wait;
     }
 
     return;
@@ -322,13 +324,13 @@ void    ANI_Loop_Toggle()
 
 void    ANI_Speed_Up()
 {
-    if( frame_delay > 1 )
+    if( current_anim->frame_wait > 1 )
     {
-        frame_delay--;
+        current_anim->frame_wait--;
     }
     else
     {
-        frame_delay = 1;
+        current_anim->frame_wait = 1;
     }
 
     return;
@@ -337,13 +339,13 @@ void    ANI_Speed_Up()
 
 void    ANI_Speed_Down()
 {
-    if( frame_delay < MAX_DELAY )
+    if( current_anim->frame_wait < MAX_DELAY )
     {
-        frame_delay++;
+        current_anim->frame_wait++;
     }
     else
     {
-        frame_delay = MAX_DELAY;
+        current_anim->frame_wait = MAX_DELAY;
     }
 
     return;
@@ -380,7 +382,38 @@ anim_type   *ANI_Get_Animation( int index )
 // takes a pointer of data loaded from file
 int         ANI_Load_Animation( int32_t *frames, int no_of_frames, int speed )
 {
-    // TODO
+    printf( "Attempting to load animation, %d frames, %d delay\n", no_of_frames, speed );
+
+
+    if( no_of_animations >= MAX_ANIMATIONS-1 )
+    {
+        UTI_Print_Debug( "Cannot load animation, limit reached" );
+        return 0;
+    }
+
+    anim_type       *temp = NULL;
+    temp = UTI_EC_Malloc( sizeof( anim_type ) );
+
+
+    int i;
+    for( i = 0; i < MAX_ANIMATION_FRAMES; i++ )
+    {
+        if( i < no_of_frames )
+        {
+            temp->frame_list[i] = frames[i];
+        }
+        else
+        {
+            temp->frame_list[i] = -1;
+        }
+    }
+
+    
+
+    temp->no_of_frames      = no_of_frames;
+    temp->frame_wait        = speed;
+
+    animation[no_of_animations++] = temp;
 
     return 1;
 }

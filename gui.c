@@ -642,7 +642,7 @@ void BTN_Remove_Sprite()
 
     if( sprite_grid_index >= ( no_of_sprites = SPR_Get_Number_Of_Sprites() ) )
     {
-        sprite_grid_index = no_of_sprites;
+        sprite_grid_index = no_of_sprites-1;
     }
 
     return;
@@ -660,6 +660,8 @@ void BTN_Prev_Anim()
         anim_frame_index = 0;
     }
 
+    ANI_Stop_Animation();
+
     return;
 }
 
@@ -668,9 +670,11 @@ void BTN_Next_Anim()
     if( anim_index < ( ANI_Get_Number_Of_Animations()-1 ) )
     {
         anim_index++;
-        Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+        Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
         anim_frame_index = 0;
     }
+    
+    ANI_Stop_Animation();
 
     return;
 }
@@ -695,7 +699,7 @@ void BTN_Remove_Anim()
     if( anim_index > anim_total )
     {
         anim_index = anim_total;
-        Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+        Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
     }
 
     return;
@@ -978,7 +982,7 @@ int GUI_Init()
                     );
 
     Convert_Int_To_String( palette_index_text, selected_palette_index, MAX_INT_STRING );
-    Convert_Int_To_String( anim_index_text, anim_index, MAX_INT_STRING );
+    Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
     Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
 
     //== SCROLL BUTTONS ==//
@@ -1125,6 +1129,9 @@ void GUI_Draw_Interface()
 
     Draw_Animation_Editor();
     Draw_Animation_Player();
+
+    anim_total = ANI_Get_Number_Of_Animations();
+    Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
 
     Set_Palette_Index_Text();
     Set_Animation_Label_Text();
