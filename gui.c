@@ -541,6 +541,7 @@ void Draw_Animation_Player()
     return;
 }
 
+
 //======================
 //  BUTTON FUNCTIONS
 //======================
@@ -1147,6 +1148,7 @@ void GUI_Draw_Interface()
                                 area_h[AREA_SPRITE_GRID]+2,
                                 area_color[AREA_SPRITE_GRID]
                              );
+ 
     return;
 }
 
@@ -1170,6 +1172,23 @@ void GUI_Draw_Edit_Sprite()
                                     GUI_AREA_SPRITE_EDIT_PIXEL_H,
                                     color
                                  );
+    }
+
+
+    //draw pixel grid
+    for( i = 1; i < SPRITE_W; i++ )
+    {
+        GRA_Draw_Horizontal_Line(   GUI_AREA_SPRITE_EDIT_X,
+                                    GUI_AREA_SPRITE_EDIT_X + GUI_AREA_SPRITE_EDIT_W,
+                                    GUI_AREA_SPRITE_EDIT_Y + ( i * GUI_AREA_SPRITE_EDIT_PIXEL_H ),
+                                    DARK_GREY
+                                );
+
+        GRA_Draw_Vertical_Line(     GUI_AREA_SPRITE_EDIT_X + ( i * GUI_AREA_SPRITE_EDIT_PIXEL_W ),
+                                    GUI_AREA_SPRITE_EDIT_Y,
+                                    GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H,
+                                    DARK_GREY
+                              );
     }
 
     return;
