@@ -382,7 +382,8 @@ anim_type   *ANI_Get_Animation( int index )
 // takes a pointer of data loaded from file
 int         ANI_Load_Animation( int32_t *frames, int no_of_frames, int speed )
 {
-    printf( "Attempting to load animation, %d frames, %d delay\n", no_of_frames, speed );
+    printf( "Attempting to load animation, %d frame%s, %d delay\n", 
+        no_of_frames, ( no_of_frames > 1 ) ? "s" : "",  speed );
 
 
     if( no_of_animations >= MAX_ANIMATIONS-1 )

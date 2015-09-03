@@ -40,7 +40,11 @@
 //  FUNCTION PROTOTYPES
 //====================================================================
 
-
+void Print_Program_Info( char *prog_name )
+{
+    printf( "\n%s - A Sprite Editing Program\tBy Paul Rafferty 2015\n", prog_name );
+    printf( "\n" );
+}
 
 
 
@@ -51,6 +55,8 @@
 int main( int argc, char *argv[] )
 {
  
+    Print_Program_Info( argv[0] );
+
     // parse arguments
     FIL_Parse_Arguments( argc, argv );
 
@@ -70,13 +76,19 @@ int main( int argc, char *argv[] )
     // INITIALIZE PALETTE DATA AND GENERATE MAIN PALETTE
     PAL_Init();
     PAL_Generate_Main_Palette();
-    //PAL_Add_User_Palette();
-
 
     // INITIALIZE GUI
     GUI_Init();
 
-    FIL_Open_File();
+
+    // OPEN OR CREATE DATA
+    if(  FIL_Open_File() == 0 )
+    {
+        // file not found, need to create a 'blank' file
+        SPR_Add_Sprite();
+        ANI_Add_Animation();
+        PAL_Add_User_Palette();
+    }
 
     ANI_Init_Animation();
 

@@ -125,10 +125,8 @@ int         FIL_Open_File()
         SPR_Load_Sprite( sprite_buffer );
     }
     // sprite_buffer malloc'd memory will be freed by SPR code
-
-    printf( "Header offset = %d\tFtell gives: %ld\n", header->animation_offset, ftell( file ) );
-
-
+    
+    
     //======= EXTRACT ANIMATION DATA =======//
     int32_t                 *frame_buffer = NULL, no_of_frames = 0, frame_wait = 0;
     frame_buffer = UTI_EC_Malloc( sizeof( int32_t ) * MAX_ANIMATION_FRAMES );     // most ever needed
@@ -162,6 +160,8 @@ int         FIL_Open_File()
     UTI_EC_Free( header );
 
     fclose( file );
+
+    printf( "File opened successfully.\n\n" );
 
     return 1;
 }
@@ -215,7 +215,6 @@ int         FIL_Write_File()
 
 
     header->animation_offset = ftell( file );
-    printf( "Header -> anim_offset = %d\n", header->animation_offset );
 
     anim_type       *anim = NULL;
     for( i = 0; i < header->no_of_animations; i++ )
