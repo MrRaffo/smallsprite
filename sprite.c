@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "utility.h"
 #include "sprite.h"
@@ -29,18 +30,84 @@
 static sprite_type                  *sprite[MAX_SPRITES];
 static int                          no_of_sprites = 0;
 
+
+static sprite_type                  spr_buffer;                 // for copy/paste
+static uint8_t                      spr_line_1[SPRITE_W];       // for shift/flip
+static uint8_t                      spr_line_2[SPRITE_W];
+
 //====================================================================
 //  PRIVATE FUNCTIONS
 //====================================================================
 
 
+void Copy_Sprite( sprite_type *spr1, sprite_type *spr2 )
+{
+    memcpy( spr2, spr1, sizeof( sprite_type ) );
+    
+    return;
+}
+
+void Copy_Line_To_Sprite( sprite_type *spr, uint8_t *line, int line_index )
+{
+    if( line_index < 0 || line_index >= SPRITE_H )
+    {
+        return;
+    }
+
+    int i, row_start = line_index * SPRITE_W;
+    
+    for( i = 0; i < SPRITE_W; i++ )
+    {
+        spr->definition[row_start + i] = line[i];
+    }
+
+    return;
+}
 
 
+void Copy_Line_From_Sprite( sprite_type *spr, uint8_t *line, int line_index )
+{
+    if( line_index < 0 || line_index >= SPRITE_H )
+    {
+        return;
+    }
+
+    int i, row_start = line_index * SPRITE_W;
+
+    for( i = 0; i < SPRITE_W; i++ )
+    {
+        line[i] = spr->definition[row_start + i];
+    }
+
+    return;
+}
 
 
 //====================================================================
 //  PUBLIC FUNCTION BODIES
 //====================================================================
+
+void SPR_Init()
+{
+    int i;
+
+    for( i = 0; i < SPRITE_SIZE; i++ )
+    {
+        spr_buffer.definition[i] = 0;
+    }
+
+    spr_buffer.palette = 0;
+    
+    
+    for( i = 0; i < SPRITE_W; i++ )
+    {
+        spr_line_1[i] = 0;
+        spr_line_2[i] = 0;
+    }
+
+    return;
+}
+
 
 void SPR_Add_Sprite()
 {
@@ -69,6 +136,55 @@ void SPR_Add_Sprite()
     return;
     
 }
+
+
+// set all sprite pixels to 0 (transparent)
+void SPR_Clear_Sprite( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return;
+    }
+
+    int i;
+    for( i = 0; i < SPRITE_SIZE; i++ )
+    {
+        sprite[index]->definition[i] = 0;
+    }
+
+    return;
+}
+
+
+// copy given sprite to the buffer, return 1 on success
+int SPR_Copy_Sprite( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return 0;
+    }
+
+    Copy_Sprite( sprite[index], &spr_buffer );
+
+    return 1;
+}
+
+// copy sprite buffer to current sprite
+int SPR_Paste_Sprite( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return 0;
+    }
+
+    Copy_Sprite( &spr_buffer, sprite[index] );
+
+    return 1;
+}
+
 
 // remove the last sprite on the list
 void SPR_Remove_Sprite()
@@ -164,6 +280,166 @@ void SPR_Free()
 
     return;
 }
+
+
+//==========================
+//  SPRITE SHIFT/FLIP
+//==========================
+
+void SPR_Shift_Left( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return;
+    }
+    
+    int line, i;
+    uint8_t temp;
+
+    for( line = 0; line < SPRITE_H; line++ )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, line );
+        temp = spr_line_1[0];
+        for( i = 1; i < SPRITE_W; i++ )
+        {
+            spr_line_1[i-1] = spr_line_1[i];
+        }
+
+        spr_line_1[SPRITE_W-1] = temp;
+
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, line );
+    }
+
+    return;
+}
+
+void SPR_Shift_Right( int index ) 
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return;
+    }
+    
+    int line, i;
+    uint8_t temp;
+
+    for( line = 0; line < SPRITE_H; line++ )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, line );
+        temp = spr_line_1[SPRITE_W-1];
+        for( i = SPRITE_W-2; i >= 0; i-- )
+        {
+            spr_line_1[i+1] = spr_line_1[i];
+        }
+
+        spr_line_1[0] = temp;
+
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, line );
+    }
+
+    return;
+}
+
+void SPR_Shift_Up( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        return;
+    }
+
+    int i;
+    
+    Copy_Line_From_Sprite( sprite[index], spr_line_2, 0 );
+
+    for( i = 1; i <= SPRITE_H-1; i++ )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, i );
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, i-1 );
+    }
+
+    Copy_Line_To_Sprite( sprite[index], spr_line_2, SPRITE_H-1 );
+
+    return;
+}
+
+
+void SPR_Shift_Down( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        return;
+    }
+
+    int i;
+    
+    Copy_Line_From_Sprite( sprite[index], spr_line_2, SPRITE_H-1 );
+
+    for( i = SPRITE_H-1; i >= 0; i-- )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, i );
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, i+1 );
+    }
+
+    Copy_Line_To_Sprite( sprite[index], spr_line_2, 0 );
+
+    return;
+}
+
+
+
+void SPR_Flip_Horizontal( int index )
+{
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return;
+    }
+
+    int i, line;
+    uint8_t temp;
+
+    for( line = 0; line < SPRITE_H; line++ )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, line );
+        for( i = 0; i < SPRITE_W/2; i++ )
+        {
+            temp = spr_line_1[i];
+            spr_line_1[i] = spr_line_1[(SPRITE_W-1)-i];
+            spr_line_1[(SPRITE_W-1)-i] = temp;
+        }
+
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, line );
+    }
+
+    return;
+}
+
+
+
+void SPR_Flip_Vertical( int index )
+{
+    
+    if( index < 0 || index >= no_of_sprites )
+    {
+        UTI_Print_Error( "Invalid sprite index" );
+        return;
+    }
+
+    int i;
+
+    for( i = 0; i < SPRITE_H/2; i++ )
+    {
+        Copy_Line_From_Sprite( sprite[index], spr_line_1, i );
+        Copy_Line_From_Sprite( sprite[index], spr_line_2, (SPRITE_H-1) - i );
+        Copy_Line_To_Sprite( sprite[index], spr_line_2, i );
+        Copy_Line_To_Sprite( sprite[index], spr_line_1, (SPRITE_H-1) - i );
+    }
+
+    return;
+}
+
 
 
 //=============================

@@ -39,11 +39,28 @@ typedef struct sprite_s sprite_type;
 //  PROTOTYPES
 //====================================================================
 
+// initialize copy buffers
+void SPR_Init();
+
+
 // add a sprite to the list
 void SPR_Add_Sprite();
 
 // remove last sprite
 void SPR_Remove_Sprite();
+
+
+// set all of a sprites pixels to 0 (transparent)
+void SPR_Clear_Sprite( int index );
+
+ 
+// copy given sprite to the buffer, return 1 on success
+int SPR_Copy_Sprite( int index );
+
+
+// copy sprite buffer to current sprite
+int SPR_Paste_Sprite( int index );
+
 
 // Set a particular pixel in the sprite definition
 void SPR_Set_Pixel( int sprite_index, int pixel_index, uint8_t pixel_value );
@@ -66,6 +83,22 @@ void SPR_Set_Sprite_Palette_Index( int sprite_index, int palette_index );
 
 // free allocated sprite memory
 void SPR_Free();
+
+//==========================
+//  SPRITE SHIFT/FLIP
+//==========================
+
+void SPR_Shift_Left( int index );
+
+void SPR_Shift_Right( int index );
+
+void SPR_Shift_Up( int index );
+
+void SPR_Shift_Down( int index );
+
+void SPR_Flip_Horizontal( int index );
+
+void SPR_Flip_Vertical( int index );
 
 
 //=============================

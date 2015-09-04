@@ -263,6 +263,20 @@ void    ANI_Init_Animation()
     current_anim = animation[0];
 }
 
+
+void    ANI_Set_Animations( int anim_index )
+{
+    if( anim_index < 0 || anim_index > no_of_animations )
+    {
+        UTI_Print_Debug( "Invalid animation index" );
+        return;
+    }
+
+    current_anim = animation[anim_index];
+
+    return;
+}
+
 void    ANI_Play_Animation( int anim_index )
 {
     if( anim_index < 0 || anim_index > no_of_animations )

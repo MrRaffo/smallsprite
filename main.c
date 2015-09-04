@@ -80,6 +80,8 @@ int main( int argc, char *argv[] )
     // INITIALIZE GUI
     GUI_Init();
 
+    // INITIALIZE SPRITES (SET UP BUFFER)
+    SPR_Init();
 
     // OPEN OR CREATE DATA
     if(  FIL_Open_File() == 0 )

@@ -1,6 +1,3 @@
 Animation frame selection not working correctly when scrolling long animations
 
-Errors caused by deleting frames that are currently part of animations 
-    - consider removing ability to delete frames
-
-
+File header reports incorrect offsets for animations and palettes

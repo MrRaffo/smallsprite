@@ -589,6 +589,44 @@ void BTN_Prev_User_Palette()
     return;
 }
 
+    //== SPRITE EDIT ==//
+
+void BTN_Shift_Sprite_Left()
+{
+    SPR_Shift_Left( sprite_grid_index );
+    return;
+}
+
+void BTN_Shift_Sprite_Right()
+{
+    SPR_Shift_Right( sprite_grid_index );
+    return;
+}
+
+void BTN_Shift_Sprite_Up()
+{
+    SPR_Shift_Up( sprite_grid_index );
+    return;
+}
+
+void BTN_Shift_Sprite_Down()
+{
+    SPR_Shift_Down( sprite_grid_index );
+    return;
+}
+
+void BTN_Flip_Sprite_Horizontal()
+{
+    SPR_Flip_Horizontal( sprite_grid_index );
+    return;
+}
+
+void BTN_Flip_Sprite_Vertical()
+{
+    SPR_Flip_Vertical( sprite_grid_index );
+    return;
+}
+
     //== GRID SCROLL ==//
 
 void BTN_Scroll_Grid_Up()
@@ -635,6 +673,15 @@ void BTN_Add_Sprite()
     return;
 }
 
+
+void BTN_Remove_Sprite()
+{
+    SPR_Clear_Sprite( sprite_grid_index );
+    
+    return;
+}
+
+/*
 void BTN_Remove_Sprite()
 {
     SPR_Remove_Sprite();
@@ -648,6 +695,23 @@ void BTN_Remove_Sprite()
 
     return;
 }
+*/
+
+
+void BTN_Copy_Sprite()
+{
+    SPR_Copy_Sprite( sprite_grid_index );
+
+    return;
+}
+
+void BTN_Paste_Sprite()
+{
+    SPR_Paste_Sprite( sprite_grid_index );
+
+    return;
+}
+
 
 
     //== ANIM CONTROLS ==//
@@ -986,6 +1050,44 @@ int GUI_Init()
     Convert_Int_To_String( anim_index_text, anim_index+1, MAX_INT_STRING );
     Convert_Int_To_String( anim_total_text, anim_total, MAX_INT_STRING );
 
+    //== SPRITE EDIT BUTTONS ==//
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        16, 16, "L",
+                        BTN_Shift_Sprite_Left
+                    );
+ 
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X + 24,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        16, 16, "U",
+                        BTN_Shift_Sprite_Up
+                    );
+ 
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X + 48,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        16, 16, "D",
+                        BTN_Shift_Sprite_Down
+                    );
+ 
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X + 72,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        16, 16, "R",
+                        BTN_Shift_Sprite_Right
+                    );
+ 
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X + 120,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        64, 16, "FLIP H",
+                        BTN_Flip_Sprite_Horizontal
+                    );
+ 
+    GRA_Make_Button (   GUI_AREA_SPRITE_EDIT_X + 192,
+                        GUI_AREA_SPRITE_EDIT_Y + GUI_AREA_SPRITE_EDIT_H + 8,
+                        64, 16, "FLIP V",
+                        BTN_Flip_Sprite_Vertical
+                    );
+ 
     //== SCROLL BUTTONS ==//
 
     GRA_Make_Button (   GUI_AREA_SPRITE_GRID_SCROLL_X,
@@ -1016,6 +1118,18 @@ int GUI_Init()
                         GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H + 8,
                         96, 24, "REM SPR",
                         BTN_Remove_Sprite
+                    );
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_X + 256,
+                        GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H + 8,
+                        96, 24, "CPY SPR",
+                        BTN_Copy_Sprite
+                    );
+
+    GRA_Make_Button (   GUI_AREA_SPRITE_GRID_X + 384,
+                        GUI_AREA_SPRITE_GRID_Y + GUI_AREA_SPRITE_GRID_H + 8,
+                        96, 24, "PST SPR",
+                        BTN_Paste_Sprite
                     );
 
     
