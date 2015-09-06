@@ -800,12 +800,29 @@ void BTN_Remove_Frame()
 
 void BTN_Scroll_Anim_Right()
 {
-    anim_frame_base < (1024-GUI_AREA_ANIM_FRAMES) ? anim_frame_base++ : anim_frame_base ;
+    if( anim_frame_base < (1024-GUI_AREA_ANIM_FRAMES) && 
+            anim_frame_base < (ANI_Get_Number_Of_Frames( anim_index )-1) )
+    {
+        anim_frame_base++;
+    }
+
+    if( anim_frame_index < anim_frame_base )
+    {
+        anim_frame_index = anim_frame_base;
+    }
 }
 
 void BTN_Scroll_Anim_Left()
 {
-    anim_frame_base > 0 ? anim_frame_base-- : 0;
+    if( anim_frame_base > 0 )
+    {
+        anim_frame_base--;
+    }
+
+    if( anim_frame_index > ( anim_frame_base + GUI_AREA_ANIM_FRAMES ) )
+    {
+        anim_frame_index = anim_frame_base + GUI_AREA_ANIM_FRAMES-1;
+    }
 }
 
     //== ANIM PLAYER ==//
