@@ -819,7 +819,7 @@ void BTN_Scroll_Anim_Left()
         anim_frame_base--;
     }
 
-    if( anim_frame_index > ( anim_frame_base + GUI_AREA_ANIM_FRAMES ) )
+    if( anim_frame_index >= ( anim_frame_base + GUI_AREA_ANIM_FRAMES ) )
     {
         anim_frame_index = anim_frame_base + GUI_AREA_ANIM_FRAMES-1;
     }
@@ -992,6 +992,7 @@ static void Input_Sprite_Grid( int button, int x, int y )
         selected_palette_index = SPR_Get_Sprite_Palette_Index( sprite_grid_index );
         Convert_Int_To_String( palette_index_text, selected_palette_index, MAX_INT_STRING );
  
+        PAL_Set_Palette( selected_palette_index );
     }
 
 

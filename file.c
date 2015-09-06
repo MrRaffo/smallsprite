@@ -34,7 +34,7 @@ char*           filename;
 
 void        usage()
 {
-    printf( "Usage:%s [FILENAME] [OPTIONS]\n", argv[0] );
+    printf( "Usage:%s [FILENAME] [OPTIONS]\n\n", argv[0] );
 
     // TODO list options
     return;

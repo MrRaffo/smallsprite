@@ -148,9 +148,9 @@ int main( int argc, char *argv[] )
     // free animation data
     ANI_Free();
 
-
     // free graphics memory and shut down SDL
     GRA_Close(); 
+
 
     return 0;
 }
