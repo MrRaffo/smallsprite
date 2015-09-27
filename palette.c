@@ -48,10 +48,10 @@ static int Create_User_Palette( int palette_index )
         return 0;
     }
 
-    printf( "Requesting %d bytes for palette...\n", SPRITE_SIZE );
+    printf( "Requesting %d bytes for palette...\n", PAL_USER_SIZE );
 
     // get space for the palette
-    user_palette[palette_index] = UTI_EC_Malloc( SPRITE_SIZE );
+    user_palette[palette_index] = UTI_EC_Malloc( PAL_USER_SIZE );
 
     // initialize palette values
     int i;

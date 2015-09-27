@@ -1,0 +1,442 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ANI_Add_Animation	anim.c	/^void     ANI_Add_Animation()$/;"	f
+ANI_Add_Frame	anim.c	/^int     ANI_Add_Frame( int anim_index, int sprite_index  )$/;"	f
+ANI_Delete_Frame	anim.c	/^void    ANI_Delete_Frame( int anim_index )$/;"	f
+ANI_Free	anim.c	/^void    ANI_Free()$/;"	f
+ANI_Get_Animation	anim.c	/^anim_type   *ANI_Get_Animation( int index )$/;"	f
+ANI_Get_Current_Frame	anim.c	/^int     ANI_Get_Current_Frame()$/;"	f
+ANI_Get_Frame	anim.c	/^int     ANI_Get_Frame( int anim_index, int frame_index )$/;"	f
+ANI_Get_Loop_Address	anim.c	/^int     *ANI_Get_Loop_Address()$/;"	f
+ANI_Get_Number_Of_Animations	anim.c	/^int     ANI_Get_Number_Of_Animations()$/;"	f
+ANI_Get_Number_Of_Frames	anim.c	/^int     ANI_Get_Number_Of_Frames( int anim_index )$/;"	f
+ANI_Init_Animation	anim.c	/^void    ANI_Init_Animation()$/;"	f
+ANI_Load_Animation	anim.c	/^int         ANI_Load_Animation( int32_t *frames, int no_of_frames, int speed )$/;"	f
+ANI_Loop_Toggle	anim.c	/^void    ANI_Loop_Toggle()$/;"	f
+ANI_Play_Animation	anim.c	/^void    ANI_Play_Animation( int anim_index )$/;"	f
+ANI_Print_Frame_List	anim.c	/^void ANI_Print_Frame_List( int index )$/;"	f
+ANI_Remove_Animation	anim.c	/^void    ANI_Remove_Animation( int index )$/;"	f
+ANI_Remove_Frame	anim.c	/^void    ANI_Remove_Frame( int anim_index, int frame_index )$/;"	f
+ANI_Set_Animations	anim.c	/^void    ANI_Set_Animations( int anim_index )$/;"	f
+ANI_Set_Frame	anim.c	/^void    ANI_Set_Frame( int anim_index, int frame_index, int value )$/;"	f
+ANI_Speed_Down	anim.c	/^void    ANI_Speed_Down()$/;"	f
+ANI_Speed_Up	anim.c	/^void    ANI_Speed_Up()$/;"	f
+ANI_Stop_Animation	anim.c	/^void    ANI_Stop_Animation()$/;"	f
+ANI_Update_Animation	anim.c	/^void    ANI_Update_Animation()$/;"	f
+AREA_ANIM_CONTROL	gui.c	/^                        AREA_ANIM_CONTROL,$/;"	e	enum:area_list	file:
+AREA_ANIM_EDIT	gui.c	/^                        AREA_ANIM_EDIT,$/;"	e	enum:area_list	file:
+AREA_ANIM_PLAYER	gui.c	/^                        AREA_ANIM_PLAYER,$/;"	e	enum:area_list	file:
+AREA_MAIN_PALETTE	gui.c	/^                        AREA_MAIN_PALETTE,$/;"	e	enum:area_list	file:
+AREA_SPRITE_EDIT	gui.c	/^enum    area_list   {   AREA_SPRITE_EDIT,$/;"	e	enum:area_list	file:
+AREA_SPRITE_GRID	gui.c	/^                        AREA_SPRITE_GRID,$/;"	e	enum:area_list	file:
+AREA_SPRITE_GRID_SCROLL	gui.c	/^                        AREA_SPRITE_GRID_SCROLL,$/;"	e	enum:area_list	file:
+AREA_USER_PALETTE	gui.c	/^                        AREA_USER_PALETTE,$/;"	e	enum:area_list	file:
+A_ADJUST	graphics.h	34;"	d
+A_ADJUST	graphics.h	46;"	d
+A_MASK	graphics.h	28;"	d
+A_MASK	graphics.h	41;"	d
+BLACK	gui.c	/^static uint32_t             BLACK;$/;"	v	file:
+BLUE	gui.c	/^static uint32_t             BLUE;$/;"	v	file:
+BTN_Add_Anim	gui.c	/^void BTN_Add_Anim()$/;"	f
+BTN_Add_Frame	gui.c	/^void BTN_Add_Frame()$/;"	f
+BTN_Add_Sprite	gui.c	/^void BTN_Add_Sprite()$/;"	f
+BTN_Copy_Sprite	gui.c	/^void BTN_Copy_Sprite()$/;"	f
+BTN_Delete_Frame	gui.c	/^void BTN_Delete_Frame()$/;"	f
+BTN_Flip_Sprite_Horizontal	gui.c	/^void BTN_Flip_Sprite_Horizontal()$/;"	f
+BTN_Flip_Sprite_Vertical	gui.c	/^void BTN_Flip_Sprite_Vertical()$/;"	f
+BTN_Next_Anim	gui.c	/^void BTN_Next_Anim()$/;"	f
+BTN_Next_User_Palette	gui.c	/^void BTN_Next_User_Palette()$/;"	f
+BTN_Paste_Sprite	gui.c	/^void BTN_Paste_Sprite()$/;"	f
+BTN_Play_Animation	gui.c	/^void BTN_Play_Animation()$/;"	f
+BTN_Prev_Anim	gui.c	/^void BTN_Prev_Anim()$/;"	f
+BTN_Prev_User_Palette	gui.c	/^void BTN_Prev_User_Palette()$/;"	f
+BTN_Remove_Anim	gui.c	/^void BTN_Remove_Anim()$/;"	f
+BTN_Remove_Frame	gui.c	/^void BTN_Remove_Frame()$/;"	f
+BTN_Remove_Sprite	gui.c	/^void BTN_Remove_Sprite()$/;"	f
+BTN_Scroll_Anim_Left	gui.c	/^void BTN_Scroll_Anim_Left()$/;"	f
+BTN_Scroll_Anim_Right	gui.c	/^void BTN_Scroll_Anim_Right()$/;"	f
+BTN_Scroll_Grid_Down	gui.c	/^void BTN_Scroll_Grid_Down()$/;"	f
+BTN_Scroll_Grid_Up	gui.c	/^void BTN_Scroll_Grid_Up()$/;"	f
+BTN_Set_Frame	gui.c	/^void BTN_Set_Frame()$/;"	f
+BTN_Shift_Sprite_Down	gui.c	/^void BTN_Shift_Sprite_Down()$/;"	f
+BTN_Shift_Sprite_Left	gui.c	/^void BTN_Shift_Sprite_Left()$/;"	f
+BTN_Shift_Sprite_Right	gui.c	/^void BTN_Shift_Sprite_Right()$/;"	f
+BTN_Shift_Sprite_Up	gui.c	/^void BTN_Shift_Sprite_Up()$/;"	f
+BTN_Speed_Down	gui.c	/^void BTN_Speed_Down()$/;"	f
+BTN_Speed_Up	gui.c	/^void BTN_Speed_Up()$/;"	f
+BTN_Stop_Animation	gui.c	/^void BTN_Stop_Animation()$/;"	f
+BUTTON_DELAY	graphics.c	759;"	d	file:
+B_ADJUST	graphics.h	33;"	d
+B_ADJUST	graphics.h	45;"	d
+B_MASK	graphics.h	27;"	d
+B_MASK	graphics.h	40;"	d
+CC	Makefile	/^CC = gcc$/;"	m
+CHAR_HEIGHT	graphics.c	631;"	d	file:
+CHAR_SET_SIZE	graphics.c	627;"	d	file:
+CHAR_SIZE	graphics.c	628;"	d	file:
+CHAR_WIDTH	graphics.c	630;"	d	file:
+CYAN	gui.c	/^static uint32_t             CYAN;$/;"	v	file:
+Convert_Int_To_String	gui.c	/^static void Convert_Int_To_String( char str[], int x, int limit )$/;"	f	file:
+Copy_Line_From_Sprite	sprite.c	/^void Copy_Line_From_Sprite( sprite_type *spr, uint8_t *line, int line_index )$/;"	f
+Copy_Line_To_Sprite	sprite.c	/^void Copy_Line_To_Sprite( sprite_type *spr, uint8_t *line, int line_index )$/;"	f
+Copy_Sprite	sprite.c	/^void Copy_Sprite( sprite_type *spr1, sprite_type *spr2 )$/;"	f
+Create_User_Palette	palette.c	/^static int Create_User_Palette( int palette_index )$/;"	f	file:
+DARK_GREY	gui.c	/^static uint32_t             DARK_GREY;$/;"	v	file:
+DEBUG	utility.h	8;"	d
+Draw_Animation_Editor	gui.c	/^void Draw_Animation_Editor()$/;"	f
+Draw_Animation_Player	gui.c	/^void Draw_Animation_Player()$/;"	f
+Draw_Area_Outlines	gui.c	/^static void Draw_Area_Outlines()$/;"	f	file:
+Draw_Buffer	graphics.c	/^void Draw_Buffer()$/;"	f
+Draw_Main_Palette	gui.c	/^static void Draw_Main_Palette()$/;"	f	file:
+Draw_Sprite_Grid	gui.c	/^static void Draw_Sprite_Grid()$/;"	f	file:
+Draw_Sprite_Preview	gui.c	/^static void Draw_Sprite_Preview( int x, int y, int sprite_index, int use_palette )$/;"	f	file:
+Draw_User_Palette_Controls	gui.c	/^static void Draw_User_Palette_Controls()$/;"	f	file:
+FIL_Open_File	file.c	/^int         FIL_Open_File()$/;"	f
+FIL_Parse_Arguments	file.c	/^void        FIL_Parse_Arguments( int m_argc, char *m_argv[] )$/;"	f
+FIL_Write_File	file.c	/^int         FIL_Write_File()$/;"	f
+FLAGS	Makefile	/^FLAGS = -g -Wall$/;"	m
+FONT_FILE_SIZE	graphics.c	625;"	d	file:
+FRAME_TIME	defs.h	28;"	d
+GRA_Check_Quit	graphics.c	/^int GRA_Check_Quit()$/;"	f
+GRA_Check_User_Input	graphics.c	/^void GRA_Check_User_Input()$/;"	f
+GRA_Clear_Screen	graphics.c	/^void GRA_Clear_Screen()$/;"	f
+GRA_Close	graphics.c	/^void GRA_Close()$/;"	f
+GRA_Create_Color	graphics.c	/^uint32_t GRA_Create_Color( uint8_t r, uint8_t g, uint8_t b, uint8_t a )$/;"	f
+GRA_Create_Display	graphics.c	/^int GRA_Create_Display( char *title, int width, int height, int w_res, int h_res )$/;"	f
+GRA_Delay	graphics.c	/^void GRA_Delay( int milli )$/;"	f
+GRA_Disable_Button	graphics.c	/^void GRA_Disable_Button( int button_index )$/;"	f
+GRA_Disable_Switch	graphics.c	/^void GRA_Disable_Switch( int switch_index )$/;"	f
+GRA_Draw_Buttons	graphics.c	/^void GRA_Draw_Buttons()$/;"	f
+GRA_Draw_Filled_Rectangle	graphics.c	/^void GRA_Draw_Filled_Rectangle( int x, int y, int w, int h, uint32_t color )$/;"	f
+GRA_Draw_Hollow_Rectangle	graphics.c	/^void GRA_Draw_Hollow_Rectangle( int x, int y, int w, int h, uint32_t color )$/;"	f
+GRA_Draw_Horizontal_Line	graphics.c	/^void GRA_Draw_Horizontal_Line( int x1, int x2, int y, uint32_t color )$/;"	f
+GRA_Draw_Switches	graphics.c	/^void GRA_Draw_Switches()$/;"	f
+GRA_Draw_Vertical_Line	graphics.c	/^void GRA_Draw_Vertical_Line( int x, int y1, int y2, uint32_t color )$/;"	f
+GRA_Draw_Vertical_Texture_Line	graphics.c	/^void GRA_Draw_Vertical_Texture_Line( float texel_normal, int col_x, int col_start, int col_end, int texture )$/;"	f
+GRA_Enable_Button	graphics.c	/^void GRA_Enable_Button( int button_index )$/;"	f
+GRA_Enable_Switch	graphics.c	/^void GRA_Enable_Switch( int switch_index )$/;"	f
+GRA_Fill_Screen	graphics.c	/^void GRA_Fill_Screen( uint32_t color )$/;"	f
+GRA_Free_Buttons	graphics.c	/^void GRA_Free_Buttons()$/;"	f
+GRA_Free_Palette	graphics.c	/^void GRA_Free_Palette()$/;"	f
+GRA_Free_Switches	graphics.c	/^void GRA_Free_Switches()$/;"	f
+GRA_Free_Textures	graphics.c	/^void GRA_Free_Textures()$/;"	f
+GRA_Generate_Palette	graphics.c	/^int GRA_Generate_Palette()$/;"	f
+GRA_GetTicks	graphics.c	/^int GRA_GetTicks()$/;"	f
+GRA_Get_Mouse_State	graphics.c	/^uint32_t GRA_Get_Mouse_State( int *x, int *y )$/;"	f
+GRA_Get_Palette_Color	graphics.c	/^uint32_t GRA_Get_Palette_Color( int index )$/;"	f
+GRA_Load_Font	graphics.c	/^int GRA_Load_Font( char *filename )$/;"	f
+GRA_Load_Palette	graphics.c	/^int GRA_Load_Palette( char *filename )$/;"	f
+GRA_Load_Textures	graphics.c	/^int GRA_Load_Textures( char *filename )$/;"	f
+GRA_Make_Button	graphics.c	/^int GRA_Make_Button( int x, int y, int w, int h, char *label, void (*function)(void) )$/;"	f
+GRA_Make_Switch	graphics.c	/^int GRA_Make_Switch( int x, int y, char c, int *value )$/;"	f
+GRA_Place_Char	graphics.c	/^void GRA_Place_Char( int letter, int x, int y, int forecolor, int bgcolor, int draw_bg )$/;"	f
+GRA_Press_Button	graphics.c	/^void GRA_Press_Button( int index )$/;"	f
+GRA_Press_Switch	graphics.c	/^void GRA_Press_Switch( int index )$/;"	f
+GRA_Print_SDL_Error	graphics.h	20;"	d
+GRA_Refresh_Window	graphics.c	/^void GRA_Refresh_Window()$/;"	f
+GRA_Set_Palette_Pixel	graphics.c	/^void GRA_Set_Palette_Pixel( int x, int y, int color )$/;"	f
+GRA_Set_RGBA_Pixel	graphics.c	/^void GRA_Set_RGBA_Pixel( int x, int y, uint32_t color )$/;"	f
+GRA_Simple_Text	graphics.c	/^void GRA_Simple_Text( char *str, int x, int y, int forecolor, int bgcolor, int draw_bg )$/;"	f
+GREEN	gui.c	/^static uint32_t             GREEN;$/;"	v	file:
+GUI_ACTIVE_COLOR	graphics.c	756;"	d	file:
+GUI_AREA_ANIM_CONTROL_H	defs.h	112;"	d
+GUI_AREA_ANIM_CONTROL_LABEL	defs.h	108;"	d
+GUI_AREA_ANIM_CONTROL_W	defs.h	111;"	d
+GUI_AREA_ANIM_CONTROL_X	defs.h	109;"	d
+GUI_AREA_ANIM_CONTROL_Y	defs.h	110;"	d
+GUI_AREA_ANIM_EDIT_H	defs.h	105;"	d
+GUI_AREA_ANIM_EDIT_LABEL	defs.h	101;"	d
+GUI_AREA_ANIM_EDIT_W	defs.h	104;"	d
+GUI_AREA_ANIM_EDIT_X	defs.h	102;"	d
+GUI_AREA_ANIM_EDIT_Y	defs.h	103;"	d
+GUI_AREA_ANIM_FRAMES	defs.h	114;"	d
+GUI_AREA_ANIM_PLAYER_H	defs.h	121;"	d
+GUI_AREA_ANIM_PLAYER_LABEL	defs.h	117;"	d
+GUI_AREA_ANIM_PLAYER_W	defs.h	120;"	d
+GUI_AREA_ANIM_PLAYER_X	defs.h	118;"	d
+GUI_AREA_ANIM_PLAYER_Y	defs.h	119;"	d
+GUI_AREA_MAIN_PALETTE_COLOR_H	defs.h	87;"	d
+GUI_AREA_MAIN_PALETTE_COLOR_W	defs.h	86;"	d
+GUI_AREA_MAIN_PALETTE_COLUMNS	defs.h	85;"	d
+GUI_AREA_MAIN_PALETTE_H	defs.h	81;"	d
+GUI_AREA_MAIN_PALETTE_LABEL	defs.h	77;"	d
+GUI_AREA_MAIN_PALETTE_ROWS	defs.h	84;"	d
+GUI_AREA_MAIN_PALETTE_W	defs.h	80;"	d
+GUI_AREA_MAIN_PALETTE_X	defs.h	78;"	d
+GUI_AREA_MAIN_PALETTE_Y	defs.h	79;"	d
+GUI_AREA_SPRITE_EDIT_H	defs.h	54;"	d
+GUI_AREA_SPRITE_EDIT_LABEL	defs.h	50;"	d
+GUI_AREA_SPRITE_EDIT_PIXEL_H	defs.h	56;"	d
+GUI_AREA_SPRITE_EDIT_PIXEL_W	defs.h	55;"	d
+GUI_AREA_SPRITE_EDIT_W	defs.h	53;"	d
+GUI_AREA_SPRITE_EDIT_X	defs.h	51;"	d
+GUI_AREA_SPRITE_EDIT_Y	defs.h	52;"	d
+GUI_AREA_SPRITE_GRID_COLUMNS	defs.h	61;"	d
+GUI_AREA_SPRITE_GRID_H	defs.h	67;"	d
+GUI_AREA_SPRITE_GRID_LABEL	defs.h	59;"	d
+GUI_AREA_SPRITE_GRID_ROWS	defs.h	60;"	d
+GUI_AREA_SPRITE_GRID_SCROLL_H	defs.h	74;"	d
+GUI_AREA_SPRITE_GRID_SCROLL_LABEL	defs.h	70;"	d
+GUI_AREA_SPRITE_GRID_SCROLL_W	defs.h	73;"	d
+GUI_AREA_SPRITE_GRID_SCROLL_X	defs.h	71;"	d
+GUI_AREA_SPRITE_GRID_SCROLL_Y	defs.h	72;"	d
+GUI_AREA_SPRITE_GRID_W	defs.h	66;"	d
+GUI_AREA_SPRITE_GRID_X	defs.h	64;"	d
+GUI_AREA_SPRITE_GRID_Y	defs.h	65;"	d
+GUI_AREA_SPRITE_NUMBER	defs.h	62;"	d
+GUI_AREA_USER_PALETTE_COLOR_H	defs.h	98;"	d
+GUI_AREA_USER_PALETTE_COLOR_W	defs.h	97;"	d
+GUI_AREA_USER_PALETTE_H	defs.h	94;"	d
+GUI_AREA_USER_PALETTE_LABEL	defs.h	90;"	d
+GUI_AREA_USER_PALETTE_NUMBER	defs.h	96;"	d
+GUI_AREA_USER_PALETTE_W	defs.h	93;"	d
+GUI_AREA_USER_PALETTE_X	defs.h	91;"	d
+GUI_AREA_USER_PALETTE_Y	defs.h	92;"	d
+GUI_DISABLED_COLOR	graphics.c	758;"	d	file:
+GUI_Draw_Edit_Sprite	gui.c	/^void GUI_Draw_Edit_Sprite()$/;"	f
+GUI_Draw_Interface	gui.c	/^void GUI_Draw_Interface()$/;"	f
+GUI_Get_Mouse_Input	gui.c	/^void GUI_Get_Mouse_Input()$/;"	f
+GUI_HOVER_COLOR	graphics.c	757;"	d	file:
+GUI_Init	gui.c	/^int GUI_Init()    $/;"	f
+GUI_MIN_SEPARATION	defs.h	46;"	d
+GUI_SPRITE_H	defs.h	44;"	d
+GUI_SPRITE_W	defs.h	43;"	d
+GUI_WINDOW_BORDER	defs.h	47;"	d
+G_ADJUST	graphics.h	32;"	d
+G_ADJUST	graphics.h	44;"	d
+G_MASK	graphics.h	26;"	d
+G_MASK	graphics.h	39;"	d
+Get_Area	gui.c	/^static int Get_Area( int x, int y )$/;"	f	file:
+Get_Relative_Position	gui.c	/^static void Get_Relative_Position( int area_index, int *mouse_x, int *mouse_y )$/;"	f	file:
+INPUT	Makefile	/^INPUT = main.o utility.o graphics.o gui.o palette.o sprite.o anim.o file.o$/;"	m
+INVIS	gui.c	/^static uint32_t             INVIS;$/;"	v	file:
+Input_Anim_Edit	gui.c	/^static void Input_Anim_Edit( int button, int x, int y )$/;"	f	file:
+Input_Main_Palette	gui.c	/^static void Input_Main_Palette( int button, int x, int y )$/;"	f	file:
+Input_Sprite_Edit	gui.c	/^static void Input_Sprite_Edit( int button, int x, int y )$/;"	f	file:
+Input_Sprite_Grid	gui.c	/^static void Input_Sprite_Grid( int button, int x, int y )$/;"	f	file:
+Input_User_Palette	gui.c	/^static void Input_User_Palette( int button, int x, int y )$/;"	f	file:
+LIGHT_GREY	gui.c	/^static uint32_t             LIGHT_GREY;$/;"	v	file:
+LINKS	Makefile	/^LINKS = -lSDL2 -lSDL2main -lm$/;"	m
+MAX_ANIMATIONS	anim.h	21;"	d
+MAX_ANIMATION_FRAMES	anim.h	22;"	d
+MAX_BUTTONS	graphics.h	258;"	d
+MAX_DELAY	anim.c	249;"	d	file:
+MAX_INT_STRING	gui.c	202;"	d	file:
+MAX_SPRITES	sprite.h	24;"	d
+MAX_SWITCHES	graphics.h	259;"	d
+NO_OF_SCREEN_AREAS	gui.c	/^                        NO_OF_SCREEN_AREAS$/;"	e	enum:area_list	file:
+NO_OF_TEXTURES	graphics.c	/^int                 NO_OF_TEXTURES = 0;$/;"	v
+OUTPUT	Makefile	/^OUTPUT = smallsprite$/;"	m
+PALETTE_INDEX_TEXT_X	gui.c	262;"	d	file:
+PALETTE_INDEX_TEXT_Y	gui.c	263;"	d	file:
+PALETTE_SIZE	graphics.c	24;"	d	file:
+PAL_Add_User_Palette	palette.c	/^int PAL_Add_User_Palette()$/;"	f
+PAL_Free	palette.c	/^void PAL_Free()$/;"	f
+PAL_Generate_Main_Palette	palette.c	/^void PAL_Generate_Main_Palette()$/;"	f
+PAL_Get_Main_Palette_Color	palette.c	/^uint32_t PAL_Get_Main_Palette_Color( int index )$/;"	f
+PAL_Get_Number_Of_Palettes	palette.c	/^int  PAL_Get_Number_Of_Palettes()$/;"	f
+PAL_Get_Palette	palette.c	/^user_palette_type *PAL_Get_Palette( int index )$/;"	f
+PAL_Get_User_Palette_Color	palette.c	/^uint32_t PAL_Get_User_Palette_Color( int pal_index, int col_index )$/;"	f
+PAL_Get_User_Palette_Index	palette.c	/^int PAL_Get_User_Palette_Index( int pal_index, int col_index )$/;"	f
+PAL_Init	palette.c	/^void PAL_Init()$/;"	f
+PAL_Load_Palette	palette.c	/^int     PAL_Load_Palette( user_palette_type *palette )$/;"	f
+PAL_MAIN_SIZE	defs.h	127;"	d
+PAL_MAX_USER_PALETTES	defs.h	129;"	d
+PAL_Next_Palette	palette.c	/^int PAL_Next_Palette()$/;"	f
+PAL_Prev_Palette	palette.c	/^int PAL_Prev_Palette()$/;"	f
+PAL_Set_Palette	palette.c	/^int PAL_Set_Palette( int index )$/;"	f
+PAL_Set_User_Palette_Index	palette.c	/^void PAL_Set_User_Palette_Index( int pal_index, int col_index, int new_val )$/;"	f
+PAL_USER_SIZE	defs.h	128;"	d
+PROGRAM_NAME_STRING	defs.h	16;"	d
+PROGRAM_VERSION_STRING	defs.h	17;"	d
+Print_Program_Info	main.c	/^void Print_Program_Info( char *prog_name )$/;"	f
+RED	gui.c	/^static uint32_t             RED;$/;"	v	file:
+R_ADJUST	graphics.h	31;"	d
+R_ADJUST	graphics.h	43;"	d
+R_MASK	graphics.h	25;"	d
+R_MASK	graphics.h	38;"	d
+SIGNATURE	file.h	19;"	d
+SPRITE_H	defs.h	25;"	d
+SPRITE_SIZE	defs.h	26;"	d
+SPRITE_W	defs.h	24;"	d
+SPR_Add_Sprite	sprite.c	/^void SPR_Add_Sprite()$/;"	f
+SPR_Clear_Sprite	sprite.c	/^void SPR_Clear_Sprite( int index )$/;"	f
+SPR_Copy_Sprite	sprite.c	/^int SPR_Copy_Sprite( int index )$/;"	f
+SPR_DEBUG_Show_Sprite	sprite.c	/^void SPR_DEBUG_Show_Sprite( int sprite_index )$/;"	f
+SPR_Flip_Horizontal	sprite.c	/^void SPR_Flip_Horizontal( int index )$/;"	f
+SPR_Flip_Vertical	sprite.c	/^void SPR_Flip_Vertical( int index )$/;"	f
+SPR_Free	sprite.c	/^void SPR_Free()$/;"	f
+SPR_Get_Number_Of_Sprites	sprite.c	/^int SPR_Get_Number_Of_Sprites()$/;"	f
+SPR_Get_Pixel	sprite.c	/^uint8_t SPR_Get_Pixel( int sprite_index, int pixel_index )$/;"	f
+SPR_Get_Sprite	sprite.c	/^uint8_t         *SPR_Get_Sprite( int index )$/;"	f
+SPR_Get_Sprite_Palette_Index	sprite.c	/^int SPR_Get_Sprite_Palette_Index( int sprite_index )$/;"	f
+SPR_Init	sprite.c	/^void SPR_Init()$/;"	f
+SPR_Load_Sprite	sprite.c	/^int             SPR_Load_Sprite( sprite_type *definition )$/;"	f
+SPR_Paste_Sprite	sprite.c	/^int SPR_Paste_Sprite( int index )$/;"	f
+SPR_Remove_Sprite	sprite.c	/^void SPR_Remove_Sprite()$/;"	f
+SPR_Set_Pixel	sprite.c	/^void SPR_Set_Pixel( int sprite_index, int pixel_index, uint8_t pixel_value )$/;"	f
+SPR_Set_Sprite_Palette_Index	sprite.c	/^void SPR_Set_Sprite_Palette_Index( int sprite_index, int palette_index )$/;"	f
+SPR_Shift_Down	sprite.c	/^void SPR_Shift_Down( int index )$/;"	f
+SPR_Shift_Left	sprite.c	/^void SPR_Shift_Left( int index )$/;"	f
+SPR_Shift_Right	sprite.c	/^void SPR_Shift_Right( int index ) $/;"	f
+SPR_Shift_Up	sprite.c	/^void SPR_Shift_Up( int index )$/;"	f
+SWT_Loop_Toggle	gui.c	/^void SWT_Loop_Toggle()$/;"	f
+Set_Animation_Label_Text	gui.c	/^void Set_Animation_Label_Text()$/;"	f
+Set_Palette_Index_Text	gui.c	/^void Set_Palette_Index_Text()$/;"	f
+Swap_Buffer	graphics.c	/^void Swap_Buffer()$/;"	f
+TEX_SIZE	graphics.c	/^int                 TEX_SIZE = 0;               \/\/ size of each texture in texels$/;"	v
+UTI_EC_Free	utility.c	/^void UTI_EC_Free( void *ptr )$/;"	f
+UTI_EC_Malloc	utility.c	/^void *UTI_EC_Malloc( size_t size )$/;"	f
+UTI_Fatal_Error	utility.c	/^void UTI_Fatal_Error( char *msg )$/;"	f
+UTI_Print_Debug	utility.h	24;"	d
+UTI_Print_Debug	utility.h	26;"	d
+UTI_Print_Error	utility.h	20;"	d
+UTI_Quiet_Exit	utility.c	/^void UTI_Quiet_Exit( int signal )$/;"	f
+V_DARK_GREY	gui.c	/^static uint32_t             V_DARK_GREY;$/;"	v	file:
+WHITE	gui.c	/^static uint32_t             WHITE;$/;"	v	file:
+WINDOW_HEIGHT	defs.h	36;"	d
+WINDOW_WIDTH	defs.h	35;"	d
+YELLOW	gui.c	/^static uint32_t             YELLOW;$/;"	v	file:
+__anim_h__	anim.h	13;"	d
+__defs_h__	defs.h	2;"	d
+__file_h__	file.h	12;"	d
+__func__	utility.h	13;"	d
+__func__	utility.h	15;"	d
+__graphics_h__	graphics.h	12;"	d
+__gui_h__	gui.h	2;"	d
+__palette_h__	palette.h	2;"	d
+__sprite_h__	sprite.h	15;"	d
+__utility_h__	utility.h	6;"	d
+active	graphics.h	/^                            int             active;$/;"	m	struct:scr_button_s
+active	graphics.h	/^                            int             active;$/;"	m	struct:scr_switch_s
+active_color	graphics.h	/^                            uint32_t        active_color;       \/\/ colour when button can be used$/;"	m	struct:scr_button_s
+active_color	graphics.h	/^                            uint32_t        active_color;$/;"	m	struct:scr_switch_s
+anim_frame_base	gui.c	/^static int                  anim_frame_base         = 0;    \/\/ index of first frame slot$/;"	v	file:
+anim_frame_index	gui.c	/^static int                  anim_frame_index        = 0;    \/\/ selected frame$/;"	v	file:
+anim_index	gui.c	/^static int                  anim_index              = 0;    \/\/ current animation to edit$/;"	v	file:
+anim_index_text	gui.c	/^static char         anim_index_text[MAX_INT_STRING];$/;"	v	file:
+anim_s	anim.h	/^struct anim_s   {   int32_t    frame_list[MAX_ANIMATION_FRAMES];        \/\/ a list of sprite indices$/;"	s
+anim_total	gui.c	/^static int                  anim_total              = 0;    \/\/ for displaying text$/;"	v	file:
+anim_total_text	gui.c	/^static char         anim_total_text[MAX_INT_STRING];$/;"	v	file:
+anim_type	anim.h	/^typedef struct anim_s anim_type;$/;"	t	typeref:struct:anim_s
+animation	anim.c	/^static anim_type                *animation[MAX_ANIMATIONS];$/;"	v	file:
+animation_offset	file.h	/^                            int32_t        animation_offset;$/;"	m	struct:file_header_s
+area_color	gui.c	/^static int area_color[NO_OF_SCREEN_AREAS];$/;"	v	file:
+area_h	gui.c	/^static int area_h[]         = { GUI_AREA_SPRITE_EDIT_H,$/;"	v	file:
+area_label	gui.c	/^static char *area_label[]   = { GUI_AREA_SPRITE_EDIT_LABEL,$/;"	v	file:
+area_list	gui.c	/^enum    area_list   {   AREA_SPRITE_EDIT,$/;"	g	file:
+area_pos_x	gui.c	/^static int area_pos_x[]     = { GUI_AREA_SPRITE_EDIT_X,$/;"	v	file:
+area_pos_y	gui.c	/^static int area_pos_y[]     = { GUI_AREA_SPRITE_EDIT_Y,$/;"	v	file:
+area_w	gui.c	/^static int area_w[]         = { GUI_AREA_SPRITE_EDIT_W,$/;"	v	file:
+argc	file.c	/^int             argc = 0;$/;"	v
+argv	file.c	/^char**          argv = NULL;$/;"	v
+buffer1	graphics.h	/^                                    uint32_t    *buffer1;$/;"	m	struct:scr_buffer_s
+buffer2	graphics.h	/^                                    uint32_t    *buffer2;$/;"	m	struct:scr_buffer_s
+button_p	graphics.c	/^static int                      button_p = 0;$/;"	v	file:
+buttons	graphics.c	/^static scr_button_type         *buttons[MAX_BUTTONS];$/;"	v	file:
+char_x	graphics.h	/^                            int             char_x;             \/\/ position of char$/;"	m	struct:scr_switch_s
+char_y	graphics.h	/^                            int             char_y;$/;"	m	struct:scr_switch_s
+current_anim	anim.c	/^anim_type       *current_anim = NULL;$/;"	v
+current_animation	anim.c	/^int     current_animation = 0;$/;"	v
+current_color	graphics.h	/^                            uint32_t        current_color;      \/\/ color to draw the button now$/;"	m	struct:scr_button_s
+current_color	graphics.h	/^                            uint32_t        current_color;$/;"	m	struct:scr_switch_s
+current_frame	anim.c	/^int     current_frame = 0;$/;"	v
+current_palette	palette.c	/^static int                      current_palette = 0;$/;"	v	file:
+definition	sprite.h	/^struct sprite_s {   uint8_t         definition[SPRITE_SIZE];            \/\/ sprite shape and colour info$/;"	m	struct:sprite_s
+delay	graphics.h	/^                            int             delay;              \/\/ length in frames to deactivate btn$/;"	m	struct:scr_switch_s
+delay	graphics.h	/^                            int             delay;$/;"	m	struct:scr_button_s
+disabled_color	graphics.h	/^                            uint32_t        disabled_color;     \/\/ 'greyed out' colour$/;"	m	struct:scr_button_s
+disabled_color	graphics.h	/^                            uint32_t        disabled_color;$/;"	m	struct:scr_switch_s
+file_header_s	file.h	/^struct      file_header_s { char            signature[4];$/;"	s
+file_header_type	file.h	/^typedef     struct file_header_s file_header_type;$/;"	t	typeref:struct:file_header_s
+filename	file.c	/^char*           filename;$/;"	v
+font_buffer	graphics.c	/^static uint8_t             *font_buffer        = NULL;$/;"	v	file:
+frame_delay	anim.c	/^int     frame_delay = 1;                    \/\/ speed of animation cycle, lower is faster$/;"	v
+frame_list	anim.h	/^struct anim_s   {   int32_t    frame_list[MAX_ANIMATION_FRAMES];        \/\/ a list of sprite indices$/;"	m	struct:anim_s
+frame_timer	anim.c	/^int     frame_timer = 0;$/;"	v
+frame_wait	anim.h	/^                    int32_t    frame_wait;              \/\/ number of frames to wait before changing$/;"	m	struct:anim_s
+function	graphics.h	/^                            void            (*function)(void);  \/\/ code run when button pressed$/;"	m	struct:scr_button_s
+h	graphics.h	/^                                    int         h;$/;"	m	struct:scr_buffer_s
+height	graphics.h	/^                            int             height;$/;"	m	struct:scr_button_s
+height	graphics.h	/^                            int             height;$/;"	m	struct:scr_switch_s
+hover_color	graphics.h	/^                            uint32_t        hover_color;        \/\/ colour on mouse over$/;"	m	struct:scr_button_s
+hover_color	graphics.h	/^                            uint32_t        hover_color;$/;"	m	struct:scr_switch_s
+label	graphics.h	/^                            char            *label;$/;"	m	struct:scr_button_s
+label_x	graphics.h	/^                            int             label_x;$/;"	m	struct:scr_button_s
+label_y	graphics.h	/^                            int             label_y;$/;"	m	struct:scr_button_s
+loop	anim.c	/^int     loop = 0;$/;"	v
+main	animations/test.c	/^int main( int argc, char *argv[] )$/;"	f
+main	main.c	/^int main( int argc, char *argv[] )$/;"	f
+main_palette	palette.c	/^static uint32_t                 main_palette[PAL_MAIN_SIZE];$/;"	v	file:
+mouse_b	graphics.c	/^int         mouse_b = 0;$/;"	v
+mouse_x	graphics.c	/^int         mouse_x = 0;$/;"	v
+mouse_y	graphics.c	/^int         mouse_y = 0;$/;"	v
+no_of_animations	anim.c	/^static int                      no_of_animations = 0;$/;"	v	file:
+no_of_animations	file.h	/^                            int32_t        no_of_animations; $/;"	m	struct:file_header_s
+no_of_frames	anim.h	/^                    int32_t    no_of_frames;$/;"	m	struct:anim_s
+no_of_palettes	file.h	/^                            int32_t        no_of_palettes;$/;"	m	struct:file_header_s
+no_of_palettes	palette.c	/^static int                      no_of_palettes = 0;$/;"	v	file:
+no_of_sprites	file.h	/^                            int32_t        no_of_sprites;$/;"	m	struct:file_header_s
+no_of_sprites	sprite.c	/^static int                          no_of_sprites = 0;$/;"	v	file:
+palette	graphics.c	/^static uint32_t             *palette            = NULL;$/;"	v	file:
+palette	palette.h	/^struct user_palette_s   {   uint8_t palette[PAL_USER_SIZE];  };$/;"	m	struct:user_palette_s
+palette	sprite.h	/^                    uint32_t        palette;                            \/\/ index of the palette used by the sprite$/;"	m	struct:sprite_s
+palette_index_text	gui.c	/^static char         palette_index_text[MAX_INT_STRING];$/;"	v	file:
+palette_offset	file.h	/^                            int32_t        palette_offset;$/;"	m	struct:file_header_s
+pixel_ratio_x	graphics.c	/^static float                pixel_ratio_x       = 0.0f;         \/\/ scr_width  \/ res_width (for mouse position)$/;"	v	file:
+pixel_ratio_y	graphics.c	/^static float                pixel_ratio_y       = 0.0f;         \/\/ scr_height \/ res_height$/;"	v	file:
+playing	anim.c	/^int     playing = 0;$/;"	v
+r_buffer	graphics.c	/^static uint32_t             *r_buffer           = NULL;         \/\/ buffer to display (read from)$/;"	v	file:
+res_height	graphics.c	/^static int                  res_height          = 0;$/;"	v	file:
+res_width	graphics.c	/^static int                  res_width           = 0;            \/\/ render dimensions$/;"	v	file:
+reverse_string	gui.c	/^static void reverse_string( char str[] )$/;"	f	file:
+scr_buffer	graphics.c	/^static scr_buffer_type      scr_buffer          = { 0, 0, NULL, NULL };$/;"	v	file:
+scr_buffer_s	graphics.h	/^struct scr_buffer_s             {$/;"	s
+scr_buffer_type	graphics.h	/^typedef struct scr_buffer_s scr_buffer_type;$/;"	t	typeref:struct:scr_buffer_s
+scr_button_s	graphics.h	/^struct scr_button_s     {$/;"	s
+scr_button_type	graphics.h	/^typedef struct scr_button_s     scr_button_type;$/;"	t	typeref:struct:scr_button_s
+scr_height	graphics.c	/^static int                  scr_height          = 0;            $/;"	v	file:
+scr_rect	graphics.c	/^static SDL_Rect             scr_rect           = { 0, 0, 0, 0 };$/;"	v	file:
+scr_render	graphics.c	/^static SDL_Surface          *scr_render         = NULL;         \/\/ render surface$/;"	v	file:
+scr_surface	graphics.c	/^static SDL_Surface          *scr_surface        = NULL;         \/\/ window surface$/;"	v	file:
+scr_switch_s	graphics.h	/^struct scr_switch_s     {$/;"	s
+scr_switch_type	graphics.h	/^typedef struct scr_switch_s     scr_switch_type;$/;"	t	typeref:struct:scr_switch_s
+scr_width	graphics.c	/^static int                  scr_width           = 0;            \/\/ window dimensions$/;"	v	file:
+scr_window	graphics.c	/^static SDL_Window           *scr_window         = NULL;         \/\/ display window$/;"	v	file:
+selected_palette_index	gui.c	/^static int                  selected_palette_index  = 0;    \/\/ palette user is currently using$/;"	v	file:
+selected_palette_option	gui.c	/^static int                  selected_palette_option = 1;    \/\/ palette option to change$/;"	v	file:
+signature	file.h	/^struct      file_header_s { char            signature[4];$/;"	m	struct:file_header_s
+spr_buffer	sprite.c	/^static sprite_type                  spr_buffer;                 \/\/ for copy\/paste$/;"	v	file:
+spr_line_1	sprite.c	/^static uint8_t                      spr_line_1[SPRITE_W];       \/\/ for shift\/flip$/;"	v	file:
+spr_line_2	sprite.c	/^static uint8_t                      spr_line_2[SPRITE_W];$/;"	v	file:
+sprite	sprite.c	/^static sprite_type                  *sprite[MAX_SPRITES];$/;"	v	file:
+sprite_grid_base	gui.c	/^static int                  sprite_grid_base        = 0;    \/\/ index of sprite grid 0 (scroll)$/;"	v	file:
+sprite_grid_index	gui.c	/^static int                  sprite_grid_index       = 0;    \/\/ sprite definition to edit (sprite_grid)$/;"	v	file:
+sprite_s	sprite.h	/^struct sprite_s {   uint8_t         definition[SPRITE_SIZE];            \/\/ sprite shape and colour info$/;"	s
+sprite_type	sprite.h	/^typedef struct sprite_s sprite_type;$/;"	t	typeref:struct:sprite_s
+state	graphics.h	/^                            int             *state;             \/\/ will switch between 0 and 1$/;"	m	struct:scr_switch_s
+switch_p	graphics.c	/^static int                      switch_p = 0;$/;"	v	file:
+switches	graphics.c	/^static scr_switch_type         *switches[MAX_SWITCHES];$/;"	v	file:
+texture_buffer	graphics.c	/^uint32_t            *texture_buffer = NULL;$/;"	v
+true_char	graphics.h	/^                            char            true_char;          \/\/ char displayed when 'on'$/;"	m	struct:scr_switch_s
+usage	file.c	/^void        usage()$/;"	f
+user_palette	palette.c	/^static user_palette_type        *user_palette[PAL_MAX_USER_PALETTES];$/;"	v	file:
+user_palette_control_label	gui.c	/^static char *user_palette_control_label[] = {   "TRANSPARENT",$/;"	v	file:
+user_palette_control_x	gui.c	/^static int user_palette_control_x[] = { GUI_AREA_USER_PALETTE_X + 300,$/;"	v	file:
+user_palette_control_y	gui.c	/^static int user_palette_control_y[] = { GUI_AREA_USER_PALETTE_Y,$/;"	v	file:
+user_palette_s	palette.h	/^struct user_palette_s   {   uint8_t palette[PAL_USER_SIZE];  };$/;"	s
+user_palette_type	palette.h	/^typedef struct user_palette_s       user_palette_type;$/;"	t	typeref:struct:user_palette_s
+visible	graphics.h	/^                            int             visible;$/;"	m	struct:scr_button_s
+visible	graphics.h	/^                            int             visible;$/;"	m	struct:scr_switch_s
+w	graphics.h	/^                                    int         w;$/;"	m	struct:scr_buffer_s
+w_buffer	graphics.c	/^static uint32_t             *w_buffer           = NULL;         \/\/ buffer to write to$/;"	v	file:
+width	graphics.h	/^                            int             width;$/;"	m	struct:scr_button_s
+width	graphics.h	/^                            int             width;$/;"	m	struct:scr_switch_s
+x	graphics.h	/^                            int             x;$/;"	m	struct:scr_button_s
+x	graphics.h	/^                            int             x;$/;"	m	struct:scr_switch_s
+y	graphics.h	/^                            int             y;$/;"	m	struct:scr_button_s
+y	graphics.h	/^                            int             y;$/;"	m	struct:scr_switch_s
