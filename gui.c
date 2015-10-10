@@ -132,7 +132,7 @@ static char *area_label[]   = { GUI_AREA_SPRITE_EDIT_LABEL,
                               };
 
 // color to draw each area, set in GUI_Init();
-static int area_color[NO_OF_SCREEN_AREAS];
+static int area_color[no_of_screen_areas];
 
 
 //=======================

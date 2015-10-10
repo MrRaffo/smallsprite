@@ -216,6 +216,13 @@ void SPR_Set_Pixel( int sprite_index, int pixel_index, uint8_t pixel_value )
         return;
     }
 
+    if( pixel_value > PAL_MAIN_SIZE )
+    {
+        printf( "Colour/Palette index = %d\n", pixel_value );
+        UTI_Print_Debug( "Invalid palette colour index" );
+        return;
+    }
+
     sprite[sprite_index]->definition[pixel_index] = pixel_value;
     return;
 }
@@ -245,6 +252,12 @@ uint8_t SPR_Get_Pixel( int sprite_index, int pixel_index )
 
 int SPR_Get_Sprite_Palette_Index( int sprite_index )
 {
+    if( sprite_index < 0 || sprite_index >= no_of_sprites )
+    {
+        UTI_Print_Debug( "Invalid Sprite index" );
+        return 0;
+    }
+
     return sprite[sprite_index]->palette;
 }
 
