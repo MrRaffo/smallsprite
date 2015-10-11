@@ -132,7 +132,7 @@ static char *area_label[]   = { GUI_AREA_SPRITE_EDIT_LABEL,
                               };
 
 // color to draw each area, set in GUI_Init();
-static int area_color[no_of_screen_areas];
+static int area_color[NO_OF_SCREEN_AREAS];
 
 
 //=======================
@@ -429,7 +429,7 @@ static void Draw_Sprite_Grid()
     int no_of_sprites = SPR_Get_Number_Of_Sprites();
 
     int cur_sprite, cur_x, cur_y;
-    for( cur_sprite = sprite_grid_base; cur_sprite < no_of_sprites; cur_sprite++ )
+    for( cur_sprite = sprite_grid_base; cur_sprite < no_of_sprites && (cur_sprite - sprite_grid_base) < GUI_AREA_SPRITE_NUMBER; cur_sprite++ )
     {
         cur_x = (cur_sprite - sprite_grid_base) % GUI_AREA_SPRITE_GRID_COLUMNS;
         cur_y = (cur_sprite - sprite_grid_base) / GUI_AREA_SPRITE_GRID_COLUMNS;

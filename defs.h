@@ -66,6 +66,7 @@
 #define GUI_AREA_SPRITE_GRID_W                  GUI_AREA_SPRITE_GRID_COLUMNS*GUI_SPRITE_W
 #define GUI_AREA_SPRITE_GRID_H                  GUI_AREA_SPRITE_GRID_ROWS*GUI_SPRITE_H
 
+
 // sprite display scroller (when more than sprite_rows*sprite_columns sprites exist)
 #define GUI_AREA_SPRITE_GRID_SCROLL_LABEL       "SPRITE GRID SCROLL"
 #define GUI_AREA_SPRITE_GRID_SCROLL_X           768
