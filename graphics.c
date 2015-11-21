@@ -289,7 +289,12 @@ void GRA_Clear_Screen()
 // fill screen with color
 void GRA_Fill_Screen( uint32_t color )
 {
-    SDL_FillRect( scr_surface, NULL, color );
+    int i;
+    for( i = 0; i < res_width * res_height; i++ )
+    {
+        w_buffer[i] = color;
+    }
+
     return;
 }
 

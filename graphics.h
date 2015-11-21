@@ -8,6 +8,10 @@
     made for use with my texture and palette definitions to give an old fashioned look
 */
 
+// TODO
+
+// Add flags to check if fonts are loaded before attempting to use them
+
 #ifndef __graphics_h__
 #define __graphics_h__
 
