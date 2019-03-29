@@ -762,6 +762,7 @@ uint32_t GRA_Get_Mouse_State( int *x, int *y )
 #define     GUI_HOVER_COLOR             0xffb08000                // CYAN
 #define     GUI_DISABLED_COLOR          0xff808080                // GREY
 #define     BUTTON_DELAY                8                        // frame delay
+#define     SWITCH_DELAY                32
 
 // used to check if user is using buttons/gui
 int         mouse_x = 0;
@@ -847,6 +848,7 @@ int GRA_Make_Switch( int x, int y, char c, int *value )
 
     switches[switch_p]->active          = 1;
     switches[switch_p]->visible         = 1;
+    switches[switch_p]->delay           = 0;
 
     switches[switch_p]->state           = value;
 
@@ -979,6 +981,10 @@ void GRA_Press_Switch( int index )
         printf( "Switch index = %d\n", index );
         return;
     }
+    
+    if ((switches[index]->active) == 0) {
+        return;
+    }
 
     if( *(switches[index]->state) == 0 )
     {
@@ -988,6 +994,9 @@ void GRA_Press_Switch( int index )
     {
         *(switches[index]->state) = 0;
     }
+
+    switches[index]->delay = SWITCH_DELAY;
+    switches[index]->active = 0;
 
     return;
 }
@@ -1050,6 +1059,18 @@ void GRA_Check_User_Input()
     // check for switches
     for( i = 0; i < switch_p; i++ )
     {
+        // reset pressed switches
+        if( switches[i]->active == 0)
+        {
+            switches[i]->delay--;
+            if( switches[i]->delay < 1 )
+            {
+                switches[i]->delay = 0;
+                switches[i]->active = 1;
+                switches[i]->current_color = switches[i]->disabled_color; // disabled???
+            }
+        }
+
         if( mouse_x > switches[i]->x && mouse_x < (switches[i]->x + switches[i]->width)  &&
             mouse_y > switches[i]->y && mouse_y < (switches[i]->y + switches[i]->height) && 
             switches[i]->active )

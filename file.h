@@ -22,7 +22,7 @@
 //  TYPES
 //===================================================================
 
-struct      file_header_s { char            signature[4];
+struct      file_header_s { char           signature[4];
                             int32_t        no_of_sprites;
                             int32_t        no_of_animations; 
                             int32_t        no_of_palettes;

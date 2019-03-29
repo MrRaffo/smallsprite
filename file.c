@@ -259,7 +259,7 @@ int         FIL_Write_File()
 
     //re-write header, now that it has the palette and animation offsets
     rewind( file );
-    fwrite( header, sizeof( header ), 1, file );
+    fwrite( header, sizeof( file_header_type ), 1, file );
 
     UTI_EC_Free( header );
     fclose( file );
