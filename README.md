@@ -12,7 +12,6 @@ Written for linux, download and 'make'
 
 ### Contribution guidelines ###
 
-Don't touch
 
 ### Who do I talk to? ###
 Paul Rafferty @ prafferty@outlook.com
